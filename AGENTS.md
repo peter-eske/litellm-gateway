@@ -28,10 +28,10 @@ OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Por
 
 ```bash
 # Auf VPS kopieren
-scp -r . root@deine-vps:/www/wwwroot/gateway.ftbot.de/
+scp -r . root@213.202.218.154:/www/wwwroot/gateway.ftbot.de/
 
 # Per SSH einloggen, .env erstellen, dann deployen
-ssh root@deine-vps
+ssh root@213.202.218.154
 chmod +x /www/wwwroot/gateway.ftbot.de/deploy.sh
 /www/wwwroot/gateway.ftbot.de/deploy.sh
 ```
@@ -57,6 +57,23 @@ docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml logs -f
 ```
 
 ## Fallstricke
+
+## CI/CD (GitHub Actions)
+
+Bei Push auf `main` deployt der Workflow `.github/workflows/deploy.yml` automatisch per SSH auf den VPS. Der Workflow führt `update.sh` aus (git pull, NGINX-Config-Reload falls nötig, Docker-Container-Neustart).
+
+### Erforderliche GitHub Secrets (Org-Ebene Eske-IT)
+
+Organisation-Secrets unter `https://github.com/organizations/Eske-IT/settings/secrets/actions`. Siehe `.github/SECRETS.md` für Details.
+
+| Secret | Beschreibung |
+|---|---|
+| `SSH_HOST` | `213.202.218.154` |
+| `SSH_USER` | `root` |
+| `SSH_KEY` | Privater SSH-Key (via `ssh-keygen -t ed25519`) |
+| `SSH_PORT` | `22` |
+
+Den Public-Key auf dem VPS autorisieren: `ssh-copy-id root@213.202.218.154`
 
 - `.env` **muss** unter `/www/wwwroot/gateway.ftbot.de/.env` existieren bevor `deploy.sh` läuft, sonst bricht das Skript ab
 - `deploy.sh` verwendet `docker compose` (v2 Plugin), nicht das standalone `docker-compose`
