@@ -18,24 +18,37 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
             set -e
+            PROJECT_DIR="/www/wwwroot/gateway.ftbot.de"
 
-            if [ ! -d /www/wwwroot/gateway.ftbot.de/.git ]; then
+            echo "════════════════════════════════════════"
+            echo "  LiteLLM-Gateway Deploy"
+            echo "════════════════════════════════════════"
+
+            # ── Repo updaten ──
+            if [ ! -d "$PROJECT_DIR/.git" ]; then
               echo ">>> Erstmalig: Repo klonen"
               git clone https://github.com/peter-eske/litellm-gateway.git /tmp/litellm-gateway
-              cp -rT /tmp/litellm-gateway /www/wwwroot/gateway.ftbot.de/
+              cp -rT /tmp/litellm-gateway "$PROJECT_DIR"
               rm -rf /tmp/litellm-gateway
             else
-              echo ">>> Git Reset + Pull (lokale Änderungen verwerfen)"
-              cd /www/wwwroot/gateway.ftbot.de && git fetch origin && git reset --hard origin/main
+              echo ">>> Git Reset + Pull"
+              cd "$PROJECT_DIR" && git fetch origin && git reset --hard origin/main
             fi
 
+            # ── .env laden ──
+            if [ ! -f "$PROJECT_DIR/.env" ]; then
+              echo "[FEHLER] .env fehlt"
+              exit 1
+            fi
+            source "$PROJECT_DIR/.env"
+
             # POSTGRES_PASSWORD in .env ergänzen falls fehlend
-            if ! grep -q POSTGRES_PASSWORD /www/wwwroot/gateway.ftbot.de/.env 2>/dev/null; then
-              echo "POSTGRES_PASSWORD=$(tr -dc A-Za-z0-9 < /dev/urandom | head -c 24)" >> /www/wwwroot/gateway.ftbot.de/.env
+            if ! grep -q POSTGRES_PASSWORD "$PROJECT_DIR/.env" 2>/dev/null; then
+              echo "POSTGRES_PASSWORD=$(tr -dc A-Za-z0-9 < /dev/urandom | head -c 24)" >> "$PROJECT_DIR/.env"
               echo ">>> POSTGRES_PASSWORD zu .env hinzugefügt"
             fi
 
-            # aaPanel NGINX-Config reparieren: https→http, Host→$host, streaming
+            # ── aaPanel NGINX-Config patchen ──
             AA_CONF="/www/server/panel/vhost/nginx/gateway.ftbot.de.conf"
             if [ -f "$AA_CONF" ]; then
               echo ">>> aaPanel Config patchen"
@@ -47,5 +60,55 @@ jobs:
               nginx -t && systemctl reload nginx && echo ">>> NGINX neu geladen"
             fi
 
-            chmod +x /www/wwwroot/gateway.ftbot.de/update.sh
-            /www/wwwroot/gateway.ftbot.de/update.sh
+            # ── Docker Container ──
+            echo ""
+            echo ">>> Container neustarten"
+            cd "$PROJECT_DIR"
+            docker rm -f litellm-gateway 2>/dev/null || true
+            docker compose pull
+            docker compose up -d
+
+            echo -n "Warte auf LiteLLM"
+            for i in $(seq 1 30); do
+              if curl -sf http://127.0.0.1:4000/health/liveliness >/dev/null 2>&1; then
+                echo " bereit"
+                break
+              fi
+              echo -n "."
+              sleep 2
+            done
+
+            # ── Virtual Key ──
+            echo ""
+            echo ">>> Virtual Key für OpenCode"
+            EXISTING=$(curl -sf http://127.0.0.1:4000/key/list \
+              -H "Authorization: Bearer $LITELLM_MASTER_KEY" 2>/dev/null || echo "")
+            if echo "$EXISTING" | grep -Fq "$OPENCODE_API_KEY" 2>/dev/null; then
+              echo "Key existiert bereits"
+            else
+              curl -sf -X POST http://127.0.0.1:4000/key/generate \
+                -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
+                -H "Content-Type: application/json" \
+                -d "{
+                  \"key\": \"$OPENCODE_API_KEY\",
+                  \"models\": [\"nim-llama\", \"default\"],
+                  \"rpm_limit\": 40,
+                  \"tpm_limit\": 1000000,
+                  \"max_parallel_requests\": 1,
+                  \"metadata\": {
+                    \"description\": \"OpenCode Gateway Key\",
+                    \"min_delay_ms\": 2100
+                  }
+                }" >/dev/null 2>&1 && echo "Key erstellt mit 40 RPM Limit" || echo "Key-Erstellung fehlgeschlagen"
+            fi
+
+            # ── Verifikation ──
+            echo ""
+            echo ">>> Verifikation"
+            echo -n "Health Liveliness: "
+            curl -sf http://127.0.0.1:4000/health/liveliness >/dev/null 2>&1 && echo "OK" || echo "FEHLER"
+
+            echo ""
+            echo "════════════════════════════════════════"
+            echo "  DEPLOY FERTIG"
+            echo "════════════════════════════════════════"

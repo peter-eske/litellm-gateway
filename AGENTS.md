@@ -20,24 +20,8 @@ OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Por
 |---|---|
 | `docker-compose.yml` | Zwei Services: `postgres` (16-alpine) + `litellm-gateway` (offizielles LiteLLM-Image), DB-Volume, Config per Volume-Mount |
 | `litellm-config.yaml` | 2 Modell-Aliase (`nim-llama`, `default`) → NVIDIA NIM; keine Retries, keine Telemetrie, lokale Queue |
-| `nginx/litellm-gateway.conf` | TLS, Rate Limits, Streaming-Konfiguration (`proxy_buffering off`) |
-| `deploy.sh` | Vollständiges Deployment: Systempakete → certbot TLS → NGINX → Docker → Virtual Key → Verifikation |
 | `.env.example` | Erforderliche Variablen: `NVIDIA_API_KEY`, `LITELLM_MASTER_KEY`, `UI_USERNAME`, `UI_PASSWORD`, `OPENCODE_API_KEY`, `DOMAIN` |
 | `opencode.json.example` | OpenCode-Client-Konfiguration für das Gateway |
-
-## Deployment-Befehle
-
-```bash
-# Auf VPS kopieren
-scp -r . root@213.202.218.154:/www/wwwroot/gateway.ftbot.de/
-
-# Per SSH einloggen, .env erstellen, dann deployen
-ssh root@213.202.218.154
-chmod +x /www/wwwroot/gateway.ftbot.de/deploy.sh
-/www/wwwroot/gateway.ftbot.de/deploy.sh
-```
-
-`deploy.sh` erstellt automatisch einen Virtual Key (40 RPM-Limit) über die LiteLLM-API beim ersten Durchlauf.
 
 ## Verifikation
 
@@ -65,7 +49,7 @@ docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml logs -f
 
 Bei Push auf `main` führt der Workflow `.github/workflows/deploy.yml` einen Job aus:
 
-1. **`deploy`** – Per SSH auf den VPS: git pull, dann `update.sh` (docker compose pull + up -d)
+1. **`deploy`** – Per SSH auf den VPS: git pull, `.env` laden, Container neustarten, Virtual Key anlegen, Verifikation
 
 Kein eigener Image-Build mehr – die Config wird per Volume-Mount bereitgestellt, das Image kommt direkt von `docker.litellm.ai/berriai/litellm:main-latest`.
 
@@ -82,17 +66,13 @@ Organisation-Secrets unter `https://github.com/organizations/Eske-IT/settings/se
 
 Den Public-Key auf dem VPS autorisieren: `ssh-copy-id root@213.202.218.154`
 
-- `.env` **muss** unter `/www/wwwroot/gateway.ftbot.de/.env` existieren bevor `deploy.sh` läuft, sonst bricht das Skript ab
-- `deploy.sh` verwendet `docker compose` (v2 Plugin), nicht das standalone `docker-compose`
-- `deploy.sh` bindet `.env` direkt via `source` ein — Shell expandiert env vars inline
-- `EMAIL`-Variable in `deploy.sh` (Zeile 7, `admin@deine-domain.de`) muss vor dem ersten Deployment angepasst werden
-- `sed` ersetzt `gateway.ftbot.de` im nginx-Config zur Deployment-Zeit (Platzhalter ist hartkodiert)
+- `.env` **muss** unter `/www/wwwroot/gateway.ftbot.de/.env` existieren, sonst bricht der Workflow ab
 - Docker healthcheck nutzt `/health/liveliness` (kein Auth, kein DB nötig) – nicht `/health` (braucht DB + Auth)
 - `public_endpoints: ["/health", "/health/liveliness"]` in `litellm-config.yaml`
 - Keine deploy-Limits (512M + healthcheck-Fails verursachten OOM exit 137)
 - Config wird per Volume-Mount in `docker-compose.yml` bereitgestellt (kein eigener Image-Build)
 - Keine Retries (`num_retries: 0`), kein Redis, keine Telemetrie
 - PostgreSQL (16-alpine) für Key-Management – `DATABASE_URL` via Environment
-- Virtual Key `sk-opencode-...` wird in `update.sh` automatisch via API angelegt
+- Virtual Key `sk-opencode-...` wird im Workflow automatisch via API angelegt
 - aaPanel NGINX-Config patcht der Workflow automatisch: `https://localhost:4000` → `http://127.0.0.1:4000`, `Host localhost` → `Host $host`, + streaming
-- `plan.md` ist veraltet — alle relevanten Informationen sind in dieser `AGENTS.md` enthalten
+- `plan.md` wurde gelöscht — alle relevanten Informationen sind in dieser `AGENTS.md` enthalten
