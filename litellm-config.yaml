@@ -58,10 +58,6 @@ litellm_settings:
   success_callback: []
   failure_callback: []
 
-  # Request Limits
-  max_budget: null               # Kein Budget Limit (wir steuern über RPM)
-  budget_duration: null
-
   # Telemetrie deaktivieren
   telemetry: false
 

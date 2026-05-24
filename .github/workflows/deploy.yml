@@ -57,5 +57,12 @@ jobs:
               echo ">>> Git Reset + Pull (lokale Änderungen verwerfen)"
               cd /www/wwwroot/gateway.ftbot.de && git fetch origin && git reset --hard origin/main
             fi
+
+            # POSTGRES_PASSWORD in .env ergänzen falls fehlend
+            if ! grep -q POSTGRES_PASSWORD /www/wwwroot/gateway.ftbot.de/.env 2>/dev/null; then
+              echo "POSTGRES_PASSWORD=$(tr -dc A-Za-z0-9 < /dev/urandom | head -c 24)" >> /www/wwwroot/gateway.ftbot.de/.env
+              echo ">>> POSTGRES_PASSWORD zu .env hinzugefügt"
+            fi
+
             chmod +x /www/wwwroot/gateway.ftbot.de/update.sh
             /www/wwwroot/gateway.ftbot.de/update.sh

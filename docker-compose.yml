@@ -1,6 +1,29 @@
 # /www/wwwroot/gateway.ftbot.de/docker-compose.yml
 
 services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: litellm-postgres
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_USER: litellm
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: litellm
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U litellm -d litellm"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   litellm-gateway:
     image: ghcr.io/peter-eske/litellm-gateway:latest
     container_name: litellm-gateway
@@ -13,16 +36,21 @@ services:
       - UI_PASSWORD=${UI_PASSWORD}
       - NVIDIA_API_KEY=${NVIDIA_API_KEY}
       - OPENCODE_API_KEY=${OPENCODE_API_KEY}
+      - DATABASE_URL=postgresql://litellm:${POSTGRES_PASSWORD}@postgres:5432/litellm
+    depends_on:
+      postgres:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "python3", "-c", "import urllib.request; exit(0 if urllib.request.urlopen('http://localhost:4000/health/liveliness').getcode() in (200, 301, 302) else 1)"]
       interval: 15s
       timeout: 5s
       retries: 2
       start_period: 15s
-    # deploy-Limits entfernt: 512M + healthcheck-Fails verursachten OOM (exit 137).
-    # Steuerung erfolgt über host-level cgroups/Traefik-Rate-Limits.
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  postgres_data:
