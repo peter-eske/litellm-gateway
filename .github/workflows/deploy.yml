@@ -19,5 +19,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
+            if [ ! -d /www/wwwroot/gateway.ftbot.de/.git ]; then
+              git clone https://github.com/peter-eske/litellm-gateway.git /www/wwwroot/gateway.ftbot.de
+            else
+              cd /www/wwwroot/gateway.ftbot.de && git pull
+            fi
             chmod +x /www/wwwroot/gateway.ftbot.de/update.sh
             /www/wwwroot/gateway.ftbot.de/update.sh
