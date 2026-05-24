@@ -17,11 +17,11 @@ services:
     volumes:
       - ./litellm-config.yaml:/app/config.yaml:ro
     healthcheck:
-      test: ["CMD", "python3", "-c", "import urllib.request; exit(0 if urllib.request.urlopen('http://localhost:4000/health').getcode() in (200, 301, 302) else 1)"]
+      test: ["CMD-SHELL", "python3 -c \"import os,urllib.request as u; req=u.Request('http://localhost:4000/health'); req.add_header('Authorization','Bearer '+os.environ['LITELLM_MASTER_KEY']); exit(0 if u.urlopen(req).getcode() in (200,301,302) else 1)\""]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 20s
+      start_period: 30s
     deploy:
       resources:
         limits:
