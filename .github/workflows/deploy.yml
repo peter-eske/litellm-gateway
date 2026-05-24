@@ -1,16 +1,41 @@
-name: Deploy
+name: Build & Deploy
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
+      - name: In GHCR einloggen
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Image bauen und pushen
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Auf VPS deployen
         uses: appleboy/ssh-action@v1.2.2
         with:
@@ -19,11 +44,14 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
+            set -e
             if [ ! -d /www/wwwroot/gateway.ftbot.de/.git ]; then
+              echo ">>> Erstmalig: Repo klonen"
               git clone https://github.com/peter-eske/litellm-gateway.git /tmp/litellm-gateway
               cp -rT /tmp/litellm-gateway /www/wwwroot/gateway.ftbot.de/
               rm -rf /tmp/litellm-gateway
             else
+              echo ">>> Git Pull"
               cd /www/wwwroot/gateway.ftbot.de && git pull
             fi
             chmod +x /www/wwwroot/gateway.ftbot.de/update.sh

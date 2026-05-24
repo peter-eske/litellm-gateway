@@ -8,7 +8,7 @@ Single-Service LiteLLM-Deployment hinter NGINX, proxying an die NVIDIA NIM API (
 OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Port 4000) → NVIDIA NIM API
 ```
 
-- LiteLLM-Container: `litellm/litellm:main-stable` (Docker Hub, da GHCR `denied`-Fehler bei anonymem Pull), Container-Name `litellm-gateway`
+- LiteLLM-Container: Eigenes GHCR-Image `ghcr.io/peter-eske/litellm-gateway:latest`, gebaut aus `Dockerfile` (basiert auf `litellm/litellm:main-stable`), Container-Name `litellm-gateway`
 - Port 4000 nur an `127.0.0.1` gebunden (kein öffentlicher Docker-Port)
 - NGINX terminiert TLS, erzwingt Rate Limits (60r/m global, 10r/s API, 10 Verbindungen), handled Streaming
 - LiteLLM-UI nur per SSH-Tunnel erreichbar: `ssh -L 4000:127.0.0.1:4000 root@$DOMAIN` → `http://localhost:4000/ui`
@@ -17,7 +17,8 @@ OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Por
 
 | Datei | Zweck |
 |---|---|
-| `docker-compose.yml` | Einzelner `litellm-gateway`-Service, keine Abhängigkeiten |
+| `Dockerfile` | Baut eigenes Image basierend auf `litellm/litellm:main-stable`, Config embedded |
+| `docker-compose.yml` | Einzelner `litellm-gateway`-Service, zieht GHCR-Image, kein Config-Volume |
 | `litellm-config.yaml` | 2 Modell-Aliase (`nim-llama`, `default`) → NVIDIA NIM; keine Retries, keine Telemetrie, lokale Queue |
 | `nginx/litellm-gateway.conf` | TLS, Rate Limits, Streaming-Konfiguration (`proxy_buffering off`) |
 | `deploy.sh` | Vollständiges Deployment: Systempakete → certbot TLS → NGINX → Docker → Virtual Key → Verifikation |
@@ -62,7 +63,10 @@ docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml logs -f
 
 ## CI/CD (GitHub Actions)
 
-Bei Push auf `main` deployt der Workflow `.github/workflows/deploy.yml` automatisch per SSH auf den VPS. Der Workflow führt `update.sh` aus (git pull, NGINX-Config-Reload falls nötig, Docker-Container-Neustart).
+Bei Push auf `main` durchläuft der Workflow `.github/workflows/deploy.yml` zwei Jobs:
+
+1. **`build`** – Baut das Docker-Image via `Dockerfile` und pusht es an `ghcr.io/peter-eske/litellm-gateway:latest` (nutzt `GITHUB_TOKEN`)
+2. **`deploy`** (braucht `build`) – Per SSH auf den VPS: git pull, dann `update.sh` (docker compose pull + up -d)
 
 ### Erforderliche GitHub Secrets (Org-Ebene Eske-IT)
 
@@ -82,7 +86,9 @@ Den Public-Key auf dem VPS autorisieren: `ssh-copy-id root@213.202.218.154`
 - `deploy.sh` bindet `.env` direkt via `source` ein — Shell expandiert env vars inline
 - `EMAIL`-Variable in `deploy.sh` (Zeile 7, `admin@deine-domain.de`) muss vor dem ersten Deployment angepasst werden
 - `sed` ersetzt `gateway.ftbot.de` im nginx-Config zur Deployment-Zeit (Platzhalter ist hartkodiert)
-- Container gecappt auf 0,4 Kerne, 512 MB RAM
-- SQLite-DB unter `litellm_data/litellm.db` — keine externe Datenbank
+- Docker healthcheck nutzt `/health/liveliness` (kein Auth, kein DB nötig) – nicht `/health` (braucht DB + Auth)
+- `public_endpoints: ["/health", "/health/liveliness"]` in `litellm-config.yaml`
+- Keine deploy-Limits (512M + healthcheck-Fails verursachten OOM exit 137)
+- Config in Dockerfile embedded (kein Volume-Mount für `litellm-config.yaml`)
 - Keine Retries (`num_retries: 0`), kein Redis, keine Telemetrie
 - `plan.md` ist veraltet — alle relevanten Informationen sind in dieser `AGENTS.md` enthalten

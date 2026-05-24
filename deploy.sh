@@ -83,7 +83,7 @@ docker compose up -d
 # Warten bis bereit
 echo -n "Warte auf LiteLLM"
 for i in $(seq 1 30); do
-    if curl -sf http://127.0.0.1:4000/health >/dev/null 2>&1; then
+    if curl -sf http://127.0.0.1:4000/health/liveliness >/dev/null 2>&1; then
         echo " bereit"
         break
     fi
