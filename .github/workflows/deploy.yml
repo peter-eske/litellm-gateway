@@ -54,8 +54,8 @@ jobs:
               cp -rT /tmp/litellm-gateway /www/wwwroot/gateway.ftbot.de/
               rm -rf /tmp/litellm-gateway
             else
-              echo ">>> Git Pull"
-              cd /www/wwwroot/gateway.ftbot.de && git pull
+              echo ">>> Git Reset + Pull (lokale Änderungen verwerfen)"
+              cd /www/wwwroot/gateway.ftbot.de && git fetch origin && git reset --hard origin/main
             fi
             chmod +x /www/wwwroot/gateway.ftbot.de/update.sh
             /www/wwwroot/gateway.ftbot.de/update.sh
