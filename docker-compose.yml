@@ -25,11 +25,14 @@ services:
         max-file: "3"
 
   litellm-gateway:
-    image: ghcr.io/peter-eske/litellm-gateway:latest
+    image: docker.litellm.ai/berriai/litellm:main-latest
     container_name: litellm-gateway
     restart: unless-stopped
     ports:
       - "127.0.0.1:4000:4000"
+    command: ["--port", "4000", "--config", "/app/config.yaml"]
+    volumes:
+      - ./litellm-config.yaml:/app/config.yaml:ro
     environment:
       - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}
       - UI_USERNAME=${UI_USERNAME}

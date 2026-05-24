@@ -8,17 +8,17 @@ Single-Service LiteLLM-Deployment hinter NGINX, proxying an die NVIDIA NIM API (
 OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Port 4000) → NVIDIA NIM API
 ```
 
-- LiteLLM-Container: Eigenes GHCR-Image `ghcr.io/peter-eske/litellm-gateway:latest`, gebaut aus `Dockerfile` (basiert auf `litellm/litellm:main-stable`), Container-Name `litellm-gateway`
+- LiteLLM-Container: Image von `docker.litellm.ai/berriai/litellm:main-latest`, Config per Volume-Mount, Container-Name `litellm-gateway`
 - Port 4000 nur an `127.0.0.1` gebunden (kein öffentlicher Docker-Port)
 - NGINX terminiert TLS, erzwingt Rate Limits (60r/m global, 10r/s API, 10 Verbindungen), handled Streaming
 - LiteLLM-UI nur per SSH-Tunnel erreichbar: `ssh -L 4000:127.0.0.1:4000 root@$DOMAIN` → `http://localhost:4000/ui`
+- PostgreSQL (16-alpine) als Sidecar für Key-Management und Persistenz
 
 ## Wichtige Dateien
 
 | Datei | Zweck |
 |---|---|
-| `Dockerfile` | Baut eigenes Image basierend auf `litellm/litellm:main-stable`, Config embedded |
-| `docker-compose.yml` | Einzelner `litellm-gateway`-Service, zieht GHCR-Image, kein Config-Volume |
+| `docker-compose.yml` | Zwei Services: `postgres` (16-alpine) + `litellm-gateway` (offizielles LiteLLM-Image), DB-Volume, Config per Volume-Mount |
 | `litellm-config.yaml` | 2 Modell-Aliase (`nim-llama`, `default`) → NVIDIA NIM; keine Retries, keine Telemetrie, lokale Queue |
 | `nginx/litellm-gateway.conf` | TLS, Rate Limits, Streaming-Konfiguration (`proxy_buffering off`) |
 | `deploy.sh` | Vollständiges Deployment: Systempakete → certbot TLS → NGINX → Docker → Virtual Key → Verifikation |
@@ -59,14 +59,15 @@ docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml logs -f
 
 ## Fallstricke
 
-- GHCR (`ghcr.io/berriai/litellm`) verweigert anonyme Pulls → Ausweichen auf Docker Hub (`litellm/litellm`)
+- `docker.litellm.ai` erlaubt anonyme Pulls (kein Login nötig)
 
 ## CI/CD (GitHub Actions)
 
-Bei Push auf `main` durchläuft der Workflow `.github/workflows/deploy.yml` zwei Jobs:
+Bei Push auf `main` führt der Workflow `.github/workflows/deploy.yml` einen Job aus:
 
-1. **`build`** – Baut das Docker-Image via `Dockerfile` und pusht es an `ghcr.io/peter-eske/litellm-gateway:latest` (nutzt `GITHUB_TOKEN`)
-2. **`deploy`** (braucht `build`) – Per SSH auf den VPS: git pull, dann `update.sh` (docker compose pull + up -d)
+1. **`deploy`** – Per SSH auf den VPS: git pull, dann `update.sh` (docker compose pull + up -d)
+
+Kein eigener Image-Build mehr – die Config wird per Volume-Mount bereitgestellt, das Image kommt direkt von `docker.litellm.ai/berriai/litellm:main-latest`.
 
 ### Erforderliche GitHub Secrets (Org-Ebene Eske-IT)
 
@@ -89,6 +90,9 @@ Den Public-Key auf dem VPS autorisieren: `ssh-copy-id root@213.202.218.154`
 - Docker healthcheck nutzt `/health/liveliness` (kein Auth, kein DB nötig) – nicht `/health` (braucht DB + Auth)
 - `public_endpoints: ["/health", "/health/liveliness"]` in `litellm-config.yaml`
 - Keine deploy-Limits (512M + healthcheck-Fails verursachten OOM exit 137)
-- Config in Dockerfile embedded (kein Volume-Mount für `litellm-config.yaml`)
+- Config wird per Volume-Mount in `docker-compose.yml` bereitgestellt (kein eigener Image-Build)
 - Keine Retries (`num_retries: 0`), kein Redis, keine Telemetrie
+- PostgreSQL (16-alpine) für Key-Management – `DATABASE_URL` via Environment
+- Virtual Key `sk-opencode-...` wird in `update.sh` automatisch via API angelegt
+- aaPanel NGINX-Config patcht der Workflow automatisch: `https://localhost:4000` → `http://127.0.0.1:4000`, `Host localhost` → `Host $host`, + streaming
 - `plan.md` ist veraltet — alle relevanten Informationen sind in dieser `AGENTS.md` enthalten
