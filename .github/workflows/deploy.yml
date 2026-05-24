@@ -20,10 +20,9 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
             if [ ! -d /www/wwwroot/gateway.ftbot.de/.git ]; then
-              mv /www/wwwroot/gateway.ftbot.de /www/wwwroot/gateway.ftbot.de.bak 2>/dev/null || true
-              git clone https://github.com/peter-eske/litellm-gateway.git /www/wwwroot/gateway.ftbot.de
-              cp /www/wwwroot/gateway.ftbot.de.bak/.env /www/wwwroot/gateway.ftbot.de/ 2>/dev/null || true
-              rm -rf /www/wwwroot/gateway.ftbot.de.bak
+              git clone https://github.com/peter-eske/litellm-gateway.git /tmp/litellm-gateway
+              cp -rT /tmp/litellm-gateway /www/wwwroot/gateway.ftbot.de/
+              rm -rf /tmp/litellm-gateway
             else
               cd /www/wwwroot/gateway.ftbot.de && git pull
             fi
