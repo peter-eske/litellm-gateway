@@ -4,7 +4,7 @@ version: '3.8'
 
 services:
   litellm-gateway:
-    image: ghcr.io/berriai/litellm:main-stable
+    image: litellm/litellm:main-stable
     container_name: litellm-gateway
     restart: unless-stopped
     ports:

@@ -8,7 +8,7 @@ Single-Service LiteLLM-Deployment hinter NGINX, proxying an die NVIDIA NIM API (
 OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Port 4000) → NVIDIA NIM API
 ```
 
-- LiteLLM-Container: `ghcr.io/berriai/litellm:main-latest`, Container-Name `litellm-gateway`
+- LiteLLM-Container: `litellm/litellm:main-stable` (Docker Hub, da GHCR `denied`-Fehler bei anonymem Pull), Container-Name `litellm-gateway`
 - Port 4000 nur an `127.0.0.1` gebunden (kein öffentlicher Docker-Port)
 - NGINX terminiert TLS, erzwingt Rate Limits (60r/m global, 10r/s API, 10 Verbindungen), handled Streaming
 - LiteLLM-UI nur per SSH-Tunnel erreichbar: `ssh -L 4000:127.0.0.1:4000 root@$DOMAIN` → `http://localhost:4000/ui`
@@ -57,6 +57,8 @@ docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml logs -f
 ```
 
 ## Fallstricke
+
+- GHCR (`ghcr.io/berriai/litellm`) verweigert anonyme Pulls → Ausweichen auf Docker Hub (`litellm/litellm`)
 
 ## CI/CD (GitHub Actions)
 
