@@ -1,0 +1,38 @@
+# /www/wwwroot/gateway.ftbot.de/docker-compose.yml
+
+version: '3.8'
+
+services:
+  litellm-gateway:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm-gateway
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      - DATABASE_URL=sqlite:////app/shared_data/litellm.db
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}
+      - UI_USERNAME=${UI_USERNAME}
+      - UI_PASSWORD=${UI_PASSWORD}
+      - NVIDIA_API_KEY=${NVIDIA_API_KEY}
+      - OPENCODE_API_KEY=${OPENCODE_API_KEY}
+    command: ["--config", "/app/config.yaml"]
+    volumes:
+      - ./litellm-config.yaml:/app/config.yaml:ro
+      - ./litellm_data:/app/shared_data
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: 512M   # LiteLLM braucht realistisch ~300-400MB
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

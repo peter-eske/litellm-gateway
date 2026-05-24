@@ -1,0 +1,17 @@
+// C:\Users\peter\.config\opencode\opencode.json
+
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode/nim-llama",
+  "provider": {
+    "opencode": {
+      "baseUrl": "https://gateway.ftbot.de/v1",
+      "apiKey": "sk-opencode-min-32-zeichen-hier-eintragen",
+      "models": {
+        "nim-llama": {
+          "name": "NVIDIA NIM Llama 3.1 70B"
+        }
+      }
+    }
+  }
+}

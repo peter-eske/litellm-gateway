@@ -1,0 +1,66 @@
+# /www/wwwroot/gateway.ftbot.de/litellm-config.yaml
+
+model_list:
+  - model_name: nim-llama          # Name den OpenCode verwendet
+    litellm_params:
+      model: openai/meta/llama-3.1-70b-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 4096
+      temperature: 0.2
+      top_p: 0.7
+      stream: true
+      # Kein Fallback, kein Retry-Spam
+      num_retries: 0
+      request_timeout: 180
+      
+  # Alias damit OpenCode flexibel ist
+  - model_name: default
+    litellm_params:
+      model: openai/meta/llama-3.1-70b-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 4096
+      temperature: 0.2
+      num_retries: 0
+      request_timeout: 180
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+  # Kein lokales Modell, kein Fallback
+  drop_params: true              # Unbekannte Params ignorieren statt Fehler
+  add_function_to_prompt: false  # Kein Function Calling overhead
+
+  # Maximale Verbosität für Debugging (auf false in Produktion)
+  set_verbose: false
+
+  # UI
+  ui_access_mode: "admin_only"
+
+router_settings:
+  enable_queue: true
+  queue_type: "local"
+  queue_timeout: 60
+
+  # Strikt sequenziell - kein Parallelismus
+  num_retries: 0
+  retry_after: 0
+
+  # Routing Strategie: einfach, kein Load Balancing nötig
+  routing_strategy: "simple-shuffle"
+
+litellm_settings:
+  # Logging (nur Metadaten, keine Inhalte)
+  success_callback: []
+  failure_callback: []
+
+  # Request Limits
+  max_budget: null               # Kein Budget Limit (wir steuern über RPM)
+  budget_duration: null
+
+  # Telemetrie deaktivieren
+  telemetry: false
+
+# Rate Limits pro Virtual Key werden via API oder Startup gesetzt
+# Siehe deploy.sh für die Key-Erstellung mit RPM Limits
