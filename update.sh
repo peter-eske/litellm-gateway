@@ -47,7 +47,7 @@ docker compose up -d
 # Warten bis bereit
 echo -n "Warte auf LiteLLM"
 for i in $(seq 1 30); do
-    if curl -sf http://127.0.0.1:4000/health >/dev/null 2>&1; then
+    if curl -sf -H "Authorization: Bearer $LITELLM_MASTER_KEY" http://127.0.0.1:4000/health >/dev/null 2>&1; then
         echo " bereit"
         break
     fi
@@ -59,7 +59,7 @@ done
 echo ""
 echo ">> Verifikation"
 echo -n "Health:   "
-curl -sf http://127.0.0.1:4000/health | python3 -c \
+curl -sf -H "Authorization: Bearer $LITELLM_MASTER_KEY" http://127.0.0.1:4000/health | python3 -c \
     "import sys,json; d=json.load(sys.stdin); print('OK' if d.get('status','') in ('ok','healthy') else 'FEHLER')" \
     2>/dev/null || echo "FEHLER"
 
