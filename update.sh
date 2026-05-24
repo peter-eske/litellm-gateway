@@ -59,6 +59,30 @@ for i in $(seq 1 30); do
     sleep 2
 done
 
+# ── Virtual Key anlegen (falls nicht vorhanden) ──
+echo ""
+echo ">> Virtual Key für OpenCode"
+EXISTING=$(curl -sf http://127.0.0.1:4000/key/list \
+    -H "Authorization: Bearer $LITELLM_MASTER_KEY" 2>/dev/null || echo "")
+if echo "$EXISTING" | grep -Fq "$OPENCODE_API_KEY" 2>/dev/null; then
+    echo "Key existiert bereits"
+else
+    curl -sf -X POST http://127.0.0.1:4000/key/generate \
+        -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
+        -H "Content-Type: application/json" \
+        -d "{
+            \"key\": \"$OPENCODE_API_KEY\",
+            \"models\": [\"nim-llama\", \"default\"],
+            \"rpm_limit\": 40,
+            \"tpm_limit\": 1000000,
+            \"max_parallel_requests\": 1,
+            \"metadata\": {
+                \"description\": \"OpenCode Gateway Key\",
+                \"min_delay_ms\": 2100
+            }
+        }" >/dev/null 2>&1 && echo "Key erstellt mit 40 RPM Limit" || echo "Key-Erstellung fehlgeschlagen"
+fi
+
 # ── Verifikation ──
 echo ""
 echo ">> Verifikation"
