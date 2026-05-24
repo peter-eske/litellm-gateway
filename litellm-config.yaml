@@ -28,6 +28,9 @@ model_list:
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
 
+  # Health-Endpoint ohne Auth (für Docker healthcheck + Monitoring)
+  public_endpoints: ["/health"]
+
   # Kein lokales Modell, kein Fallback
   drop_params: true              # Unbekannte Params ignorieren statt Fehler
   add_function_to_prompt: false  # Kein Function Calling overhead
