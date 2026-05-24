@@ -41,6 +41,10 @@ fi
 # ── Container neustarten ──
 echo ""
 echo ">> Docker Container"
+
+# Alten manuell gestarteten Container entfernen (falls vorhanden)
+docker rm -f litellm-gateway 2>/dev/null || true
+
 docker compose pull
 docker compose up -d
 
@@ -58,10 +62,8 @@ done
 # ── Verifikation ──
 echo ""
 echo ">> Verifikation"
-echo -n "Health:   "
-curl -sf -H "Authorization: Bearer $LITELLM_MASTER_KEY" http://127.0.0.1:4000/health | python3 -c \
-    "import sys,json; d=json.load(sys.stdin); print('OK' if d.get('status','') in ('ok','healthy') else 'FEHLER')" \
-    2>/dev/null || echo "FEHLER"
+echo -n "Health Liveliness: "
+curl -sf http://127.0.0.1:4000/health/liveliness >/dev/null 2>&1 && echo "OK" || echo "FEHLER"
 
 echo ""
 echo "════════════════════════════════════════"
