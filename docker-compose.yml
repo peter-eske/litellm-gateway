@@ -1,7 +1,5 @@
 # /www/wwwroot/gateway.ftbot.de/docker-compose.yml
 
-version: '3.8'
-
 services:
   litellm-gateway:
     image: litellm/litellm:main-stable
@@ -16,7 +14,7 @@ services:
       - UI_PASSWORD=${UI_PASSWORD}
       - NVIDIA_API_KEY=${NVIDIA_API_KEY}
       - OPENCODE_API_KEY=${OPENCODE_API_KEY}
-    command: ["--config", "/app/config.yaml"]
+    command: ["--port", "4000", "--config", "/app/config.yaml"]
     volumes:
       - ./litellm-config.yaml:/app/config.yaml:ro
       - ./litellm_data:/app/shared_data
