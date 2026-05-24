@@ -43,8 +43,11 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
+          envs: GITHUB_TOKEN
           script: |
-            set -e
+            echo ">>> In GHCR einloggen"
+            echo "$GITHUB_TOKEN" | docker login ghcr.io -u peter-eske --password-stdin
+
             if [ ! -d /www/wwwroot/gateway.ftbot.de/.git ]; then
               echo ">>> Erstmalig: Repo klonen"
               git clone https://github.com/peter-eske/litellm-gateway.git /tmp/litellm-gateway
@@ -56,3 +59,5 @@ jobs:
             fi
             chmod +x /www/wwwroot/gateway.ftbot.de/update.sh
             /www/wwwroot/gateway.ftbot.de/update.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
