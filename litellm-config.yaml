@@ -62,4 +62,4 @@ litellm_settings:
   telemetry: false
 
 # Rate Limits pro Virtual Key werden via API oder Startup gesetzt
-# Siehe deploy.sh für die Key-Erstellung mit RPM Limits
+# Siehe .github/workflows/deploy.yml für die Key-Erstellung mit RPM Limits
