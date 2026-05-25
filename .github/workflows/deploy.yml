@@ -81,29 +81,32 @@ jobs:
               sleep 2
             done
 
-            # ── Virtual Key ──
+            # ── Virtual Key (immer neu erstellen, alten verwerfen) ──
             echo ""
             echo ">>> Virtual Key für OpenCode"
-            EXISTING=$(curl -sf http://127.0.0.1:4000/key/list \
-              -H "Authorization: Bearer $LITELLM_MASTER_KEY" 2>/dev/null || echo "")
-            if echo "$EXISTING" | grep -Fq "$OPENCODE_API_KEY" 2>/dev/null; then
-              echo "Key existiert bereits"
-            else
-              curl -sf -X POST http://127.0.0.1:4000/key/generate \
+            for kvid in $(curl -sf http://127.0.0.1:4000/key/list \
+              -H "Authorization: Bearer $LITELLM_MASTER_KEY" 2>/dev/null \
+              | python3 -c "import sys,json; [print(k['key_id']) for k in json.load(sys.stdin).get('keys',[]) if k.get('key','').startswith('sk-opencode-')]" 2>/dev/null); do
+              echo "  Alten Key löschen: $kvid"
+              curl -sf -X DELETE "http://127.0.0.1:4000/key/delete" \
                 -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
                 -H "Content-Type: application/json" \
-                -d "{
-                  \"key\": \"$OPENCODE_API_KEY\",
-                  \"models\": [\"nim-llama\", \"default\", \"fast\", \"power\", \"coding\"],
-                  \"rpm_limit\": 40,
-                  \"tpm_limit\": 1000000,
-                  \"max_parallel_requests\": 1,
-                  \"metadata\": {
-                    \"description\": \"OpenCode Gateway Key\",
-                    \"min_delay_ms\": 2100
-                  }
-                }" >/dev/null 2>&1 && echo "Key erstellt mit 40 RPM Limit" || echo "Key-Erstellung fehlgeschlagen"
-            fi
+                -d "{\"key_ids\":[\"$kvid\"]}" >/dev/null 2>&1 || true
+            done
+            curl -sf -X POST http://127.0.0.1:4000/key/generate \
+              -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"key\": \"$OPENCODE_API_KEY\",
+                \"models\": [\"nim-llama\", \"default\", \"fast\", \"power\", \"coding\"],
+                \"rpm_limit\": 40,
+                \"tpm_limit\": 1000000,
+                \"max_parallel_requests\": 1,
+                \"metadata\": {
+                  \"description\": \"OpenCode Gateway Key\",
+                  \"min_delay_ms\": 2100
+                }
+              }" >/dev/null 2>&1 && echo "Key erstellt (5 Modelle, 40 RPM)" || echo "Key-Erstellung fehlgeschlagen"
 
             # ── Verifikation ──
             echo ""
