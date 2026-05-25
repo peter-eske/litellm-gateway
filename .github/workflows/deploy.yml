@@ -57,6 +57,9 @@ jobs:
               if ! grep -q "proxy_buffering off" "$AA_CONF" 2>/dev/null; then
                 sed -i '/proxy_set_header Connection "upgrade";/a\      proxy_buffering off;\n      proxy_cache off;' "$AA_CONF"
               fi
+              if ! grep -q "proxy_read_timeout" "$AA_CONF" 2>/dev/null; then
+                sed -i '/proxy_cache off;/a\      proxy_read_timeout 300s;' "$AA_CONF"
+              fi
               nginx -t && systemctl reload nginx && echo ">>> NGINX neu geladen"
             fi
 
@@ -91,7 +94,7 @@ jobs:
                 -H "Content-Type: application/json" \
                 -d "{
                   \"key\": \"$OPENCODE_API_KEY\",
-                  \"models\": [\"nim-llama\", \"default\"],
+                  \"models\": [\"nim-llama\", \"default\", \"fast\", \"power\", \"coding\"],
                   \"rpm_limit\": 40,
                   \"tpm_limit\": 1000000,
                   \"max_parallel_requests\": 1,
