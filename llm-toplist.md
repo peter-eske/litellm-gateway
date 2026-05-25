@@ -9,21 +9,21 @@ Sortiert nach: SWE-bench Pro > SWE-bench Ver > MMLU > HumanEval
 
 | Rang | Modell | Parameter | Kontext | Latenz | Benchmarks |
 |---|---|---|---|---|---|
-| 1 | `mistralai/mistral-large-3-675b-instruct-2512` | 675B/41B | 256K | 0.4s | mmlu=85.5 |
-| 2 | `deepseek-ai/deepseek-v4-pro` | 1.6T/49B | 1M | 1.6s | swe_ver=80.6, lcb=93.5, mmlu=87.9 |
-| 3 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1M | 1.1s | swe_ver=79.0, lcb=91.6 |
-| — | *aktuell: `meta/llama-3.3-70b-instruct`* | 70B | 128K | 2.2s | swe_ver=72.0, mmlu=89.2, he=88.4, Verified=40.6 |
+| 1 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1M | 1.1s | swe_ver=79%, lcb=91.6% |
+| 2 | `mistralai/mistral-large-3-675b-instruct-2512` | 675B/41B | 256K | 0.4s | mmlu=85.5 |
+| 3 | `meta/llama-3.3-70b-instruct` | 70B | 128K | 2.2s | swe_ver=72%, mmlu=89.2, he=88.4 |
+| — | *aktuell: `meta/llama-3.3-70b-instruct`* | 70B | 128K | 2.2s | swe_ver=72%, mmlu=89.2, he=88.4 |
 
 ## default (Allrounder)
 
-Sortiert nach: SWE-bench Pro > SWE-bench Ver > MCP Atlas > MMLU
+Sortiert nach: SWE-bench Ver > LCB > MMLU > Tool-Support
 
-| Rang | Modell | Parameter | Latenz | Benchmarks |
-|---|---|---|---|---|
-| 1 | `mistralai/mistral-large-3-675b-instruct-2512` | 675B/41B | 0.4s | mmlu=85.5 |
-| 2 | `deepseek-ai/deepseek-v4-pro` | 1.6T/49B | 1.6s | swe_ver=80.6, lcb=93.5, mmlu=87.9 |
-| 3 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1.1s | swe_ver=79.0, lcb=91.6 |
-| — | *aktuell: `z-ai/glm-5.1`* | 230B | 0.9s | **keine Benchmarks** |
+| Rang | Modell | Parameter | Latenz | Tools | Benchmarks |
+|---|---|---|---|---|---|
+| 1 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1.1s | ✅ | swe_ver=79%, lcb=91.6% |
+| 2 | `mistralai/mistral-large-3-675b-instruct-2512` | 675B/41B | 0.4s | ✅ | mmlu=85.5 |
+| 3 | `deepseek-ai/deepseek-v4-pro` | 1.6T/49B | 1.6s | ❌ | swe_ver=80.6, lcb=93.5, mmlu=87.9 |
+| — | *aktuell: `deepseek-ai/deepseek-v4-flash`* | 284B/13B | 1.1s | ✅ | swe_ver=79%, lcb=91.6% |
 
 ## fast (Low-Latency)
 
@@ -40,23 +40,23 @@ Sortiert nach: Latenz (asc) > GSM8K > Benchmarks, bevorzugt <10B Parameter
 
 Sortiert nach: SWE-bench Pro > SWE-bench Ver > LCB > MMLU
 
-| Rang | Modell | Parameter | Latenz | Benchmarks |
-|---|---|---|---|---|
-| 1 | `deepseek-ai/deepseek-v4-pro` | 1.6T/49B | 1.6s | swe_ver=80.6, lcb=93.5, mmlu=87.9 |
-| 2 | `mistralai/mistral-large-3-675b-instruct-2512` | 675B/41B | 0.4s | mmlu=85.5 |
-| 3 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1.1s | swe_ver=79.0, lcb=91.6 |
-| — | *aktuell: `qwen/qwen3-coder-480b-a35b-instruct`* | 480B/35B | 1.2s | **swe_pro=38.7**, swe_ver=70.0, bash-only=55.4 |
+| Rang | Modell | Parameter | Latenz | Tools | Benchmarks |
+|---|---|---|---|---|---|---|
+| 1 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1.1s | ✅ | swe_ver=79%, lcb=91.6% |
+| 2 | `mistralai/mistral-large-3-675b-instruct-2512` | 675B/41B | 0.4s | ✅ | mmlu=85.5 |
+| 3 | `qwen/qwen3-coder-480b-a35b-instruct` | 480B/35B | 1.2s | ✅ | swe_pro=38.7%, swe_ver=~70% |
+| — | *aktuell: `qwen/qwen3-coder-480b-a35b-instruct`* | 480B/35B | 1.2s | ✅ | **swe_pro=38.7%**, swe_ver=~70% |
 
 ## coding (Code + Tool Calling)
 
-Sortiert nach: SWE-bench Pro > SWE-bench Ver > LCB > HumanEval
+Sortiert nach: LCB > SWE-bench Ver > HumanEval > Tool-Support
 
-| Rang | Modell | Parameter | Latenz | Benchmarks |
-|---|---|---|---|---|
-| 1 | `deepseek-ai/deepseek-v4-pro` | 1.6T/49B | 1.6s | swe_ver=80.6, lcb=93.5 |
-| 2 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1.1s | swe_ver=79.0, lcb=91.6 |
-| 3 | `meta/llama-3.3-70b-instruct` | 70B | 2.2s | swe_ver=72.0, he=88.4, Verified=40.6 |
-| — | *aktuell: `qwen/qwen2.5-coder-32b-instruct`* | 32B | 0.5s | **keine Benchmarks** |
+| Rang | Modell | Parameter | Latenz | Tools | Benchmarks |
+|---|---|---|---|---|---|
+| 1 | `deepseek-ai/deepseek-v4-flash` | 284B/13B | 1.1s | ✅ | swe_ver=79%, lcb=91.6% |
+| 2 | `moonshotai/kimi-k2.6` | ? | ? | ✅ | swe_ver=80.2%, lcb=89.6% |
+| 3 | `meta/llama-3.3-70b-instruct` | 70B | 2.2s | ✅ | swe_ver=~72%, he=88.4% |
+| — | *aktuell: `deepseek-ai/deepseek-v4-flash`* | 284B/13B | 1.1s | ✅ | swe_ver=79%, lcb=91.6% |
 
 ## Benchmark-Übersicht
 

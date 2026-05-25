@@ -16,16 +16,16 @@ model_list:
       request_timeout: 180
 
   # ── Allrounder (Default) ───────────────────────────────────────────────
-  # Bester Allrounder: swe_ver=80.6, lcb=93.5, mmlu=87.9
+  # Bester Allrounder mit Tool-Support: swe_ver=79%, lcb=91.6%, TTFT=0.96s
   - model_name: default
     litellm_params:
-      model: openai/deepseek-ai/deepseek-v4-pro
+      model: openai/deepseek-ai/deepseek-v4-flash
       api_base: https://integrate.api.nvidia.com/v1
       api_key: os.environ/NVIDIA_API_KEY
       max_tokens: 8192
       temperature: 0.2
       num_retries: 0
-      request_timeout: 300
+      request_timeout: 180
 
   # ── Low-Latency (3.8B, 88.6% GSM8K) ──────────────────────────────────
   - model_name: fast
@@ -49,7 +49,7 @@ model_list:
       num_retries: 0
       request_timeout: 300
 
-  # ── Code-Spezialist (LCB=91.6, swe_ver=79.0) ─────────────────────────
+  # ── Code-Spezialist (v4-flash, Tool-Support, niedrige Temperatur) ─────
   - model_name: coding
     litellm_params:
       model: openai/deepseek-ai/deepseek-v4-flash

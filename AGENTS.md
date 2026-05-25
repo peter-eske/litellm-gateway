@@ -1,6 +1,6 @@
 # AGENTS.md — litellm-gateway
 
-Single-Service LiteLLM-Deployment hinter NGINX, proxying 5 Modelle an die NVIDIA NIM API (Llama 3.3, DeepSeek V4 Pro, Phi-4-Mini, Qwen3-Coder-480B, DeepSeek V4 Flash). Läuft auf einem entfernten VPS unter `/www/wwwroot/gateway.ftbot.de/`.
+Single-Service LiteLLM-Deployment hinter NGINX, proxying 4 Modelle (5 Aliase) an die NVIDIA NIM API (Llama 3.3, DeepSeek V4 Flash, Phi-4-Mini, Qwen3-Coder-480B). Läuft auf einem entfernten VPS unter `/www/wwwroot/gateway.ftbot.de/`.
 
 ## Architektur
 
@@ -19,7 +19,7 @@ OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Por
 | Datei | Zweck |
 |---|---|
 | `docker-compose.yml` | Zwei Services: `postgres` (16-alpine) + `litellm-gateway` (offizielles LiteLLM-Image), DB-Volume, Config per Volume-Mount |
-| `litellm-config.yaml` | 5 Modell-Aliase (nim-llama→llama-3.3, default→deepseek-v4-pro, fast→phi-4-mini, power→qwen3-coder-480b, coding→deepseek-v4-flash) |
+| `litellm-config.yaml` | 5 Modell-Aliase (nim-llama→llama-3.3, default→deepseek-v4-flash, fast→phi-4-mini, power→qwen3-coder-480b, coding→deepseek-v4-flash) |
 | `llm-toplist.md` | Rangliste Top-3 pro Rolle mit Benchmarks (aus good.json + bench.json) |
 | `.env.example` | Erforderliche Variablen: `NVIDIA_API_KEY`, `LITELLM_MASTER_KEY`, `UI_USERNAME`, `UI_PASSWORD`, `OPENCODE_API_KEY`, `DOMAIN` |
 | `opencode.json.example` | OpenCode-Client-Konfiguration für das Gateway |

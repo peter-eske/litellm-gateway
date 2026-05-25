@@ -12,7 +12,7 @@
           "name": "NVIDIA Llama 3.3 70B (Legacy)"
         },
         "default": {
-          "name": "NVIDIA DeepSeek V4 Pro (Allrounder)"
+          "name": "NVIDIA DeepSeek V4 Flash (Allrounder)"
         },
         "fast": {
           "name": "NVIDIA Phi-4-Mini 3.8B (Low Latency)"
@@ -21,7 +21,7 @@
           "name": "NVIDIA Qwen3-Coder 480B (Max Quality)"
         },
         "coding": {
-          "name": "NVIDIA DeepSeek V4 Flash (Code)"
+          "name": "NVIDIA DeepSeek V4 Flash (Code, Temp 0.1)"
         }
       }
     }
