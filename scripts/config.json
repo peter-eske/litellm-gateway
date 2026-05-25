@@ -1,0 +1,34 @@
+{
+  "providers": {
+    "nvidia-nim": {
+      "name": "NVIDIA NIM Public API",
+      "description": "NVIDIA NIM inference API at integrate.api.nvidia.com",
+      "env_api_key": "NVIDIA_API_KEY",
+      "base_url": "https://integrate.api.nvidia.com/v1",
+      "auth": {
+        "type": "bearer"
+      },
+      "endpoints": {
+        "models": "/models",
+        "chat": "/chat/completions"
+      },
+      "rate_limit": {
+        "rpm": 20,
+        "delay_s": 3.0
+      },
+      "timeout_s": {
+        "default": 60,
+        "models_list": 15,
+        "phase1": 30
+      },
+      "features": {
+        "streaming": true,
+        "tool_calling": true
+      },
+      "known_specs_file": "known_specs_nvidia-nim.json",
+      "benchmarks_file": "benchmarks.json",
+      "ignore_file": "ignore.json",
+      "good_file": "good.json"
+    }
+  }
+}

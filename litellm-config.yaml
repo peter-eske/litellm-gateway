@@ -1,65 +1,82 @@
 # /www/wwwroot/gateway.ftbot.de/litellm-config.yaml
 
 model_list:
-  - model_name: nim-llama          # Name den OpenCode verwendet
+  # ── Legacy-Kompatibilität (Chat/General) ────────────────────────────────
+  # Rang 3 insgesamt, bewährt: swe_ver=72.0, mmlu=89.2, he=88.4, Verified=40.6
+  - model_name: nim-llama
     litellm_params:
-      model: openai/meta/llama-3.1-70b-instruct
+      model: openai/meta/llama-3.3-70b-instruct
       api_base: https://integrate.api.nvidia.com/v1
       api_key: os.environ/NVIDIA_API_KEY
       max_tokens: 4096
       temperature: 0.2
       top_p: 0.7
       stream: true
-      # Kein Fallback, kein Retry-Spam
       num_retries: 0
       request_timeout: 180
-      
-  # Alias damit OpenCode flexibel ist
+
+  # ── Allrounder (Default) ───────────────────────────────────────────────
+  # Bester Allrounder: swe_ver=80.6, lcb=93.5, mmlu=87.9
   - model_name: default
     litellm_params:
-      model: openai/meta/llama-3.1-70b-instruct
+      model: openai/deepseek-ai/deepseek-v4-pro
       api_base: https://integrate.api.nvidia.com/v1
       api_key: os.environ/NVIDIA_API_KEY
-      max_tokens: 4096
+      max_tokens: 8192
       temperature: 0.2
+      num_retries: 0
+      request_timeout: 300
+
+  # ── Low-Latency (3.8B, 88.6% GSM8K) ──────────────────────────────────
+  - model_name: fast
+    litellm_params:
+      model: openai/microsoft/phi-4-mini-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 2048
+      temperature: 0.5
+      num_retries: 0
+      request_timeout: 60
+
+  # ── Maximale Qualität (38.70% SWE-bench Pro, 55.4% bash-only) ────────
+  - model_name: power
+    litellm_params:
+      model: openai/qwen/qwen3-coder-480b-a35b-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 8192
+      temperature: 0.2
+      num_retries: 0
+      request_timeout: 300
+
+  # ── Code-Spezialist (LCB=91.6, swe_ver=79.0) ─────────────────────────
+  - model_name: coding
+    litellm_params:
+      model: openai/deepseek-ai/deepseek-v4-flash
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 8192
+      temperature: 0.1
       num_retries: 0
       request_timeout: 180
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
-
-  # Health-Endpoint ohne Auth (für Docker healthcheck + Monitoring)
   public_endpoints: ["/health", "/health/liveliness"]
-
-  # Kein lokales Modell, kein Fallback
-  drop_params: true              # Unbekannte Params ignorieren statt Fehler
-  add_function_to_prompt: false  # Kein Function Calling overhead
-
-  # Maximale Verbosität für Debugging (auf false in Produktion)
+  drop_params: true
+  add_function_to_prompt: false
   set_verbose: false
-
-  # UI
   ui_access_mode: "admin_only"
 
 router_settings:
   enable_queue: true
   queue_type: "local"
   queue_timeout: 60
-
-  # Strikt sequenziell - kein Parallelismus
   num_retries: 0
   retry_after: 0
-
-  # Routing Strategie: einfach, kein Load Balancing nötig
   routing_strategy: "simple-shuffle"
 
 litellm_settings:
-  # Logging (nur Metadaten, keine Inhalte)
   success_callback: []
   failure_callback: []
-
-  # Telemetrie deaktivieren
   telemetry: false
-
-# Rate Limits pro Virtual Key werden via API oder Startup gesetzt
-# Siehe .github/workflows/deploy.yml für die Key-Erstellung mit RPM Limits

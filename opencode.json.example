@@ -9,7 +9,19 @@
       "apiKey": "sk-opencode-min-32-zeichen-hier-eintragen",
       "models": {
         "nim-llama": {
-          "name": "NVIDIA NIM Llama 3.1 70B"
+          "name": "NVIDIA Llama 3.3 70B (Legacy)"
+        },
+        "default": {
+          "name": "NVIDIA DeepSeek V4 Pro (Allrounder)"
+        },
+        "fast": {
+          "name": "NVIDIA Phi-4-Mini 3.8B (Low Latency)"
+        },
+        "power": {
+          "name": "NVIDIA Qwen3-Coder 480B (Max Quality)"
+        },
+        "coding": {
+          "name": "NVIDIA DeepSeek V4 Flash (Code)"
         }
       }
     }

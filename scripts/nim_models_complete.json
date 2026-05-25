@@ -1,0 +1,954 @@
+{
+  "total_models": 117,
+  "chat_llms": 80,
+  "by_type": {
+    "chat": 80,
+    "embedding": 11,
+    "other": 4,
+    "safety": 8,
+    "speech": 2,
+    "vision": 12
+  },
+  "models_without_specs": [
+    "baai/bge-m3",
+    "microsoft/kosmos-2",
+    "mistralai/mistral-large",
+    "mistralai/mistral-nemotron",
+    "nvidia/ai-synthetic-video-detector",
+    "nvidia/embed-qa-4",
+    "nvidia/gliner-pii",
+    "nvidia/nemoretriever-parse",
+    "nvidia/nemotron-3-content-safety",
+    "nvidia/nemotron-parse",
+    "nvidia/nv-embed-v1",
+    "nvidia/nv-embedqa-e5-v5",
+    "nvidia/nvclip",
+    "nvidia/vila",
+    "sarvamai/sarvam-m",
+    "snowflake/arctic-embed-l",
+    "stepfun-ai/step-3.5-flash"
+  ],
+  "models": [
+    {
+      "id": "01-ai/yi-large",
+      "owned_by": "01-ai",
+      "params": "34B",
+      "context": "4K",
+      "type": "chat"
+    },
+    {
+      "id": "abacusai/dracarys-llama-3.1-70b-instruct",
+      "owned_by": "abacusai",
+      "params": "70B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "adept/fuyu-8b",
+      "owned_by": "adept",
+      "params": "8B",
+      "context": "8K",
+      "type": "vision"
+    },
+    {
+      "id": "ai21labs/jamba-1.5-large-instruct",
+      "owned_by": "ai21labs",
+      "params": "398B/60B",
+      "context": "256K",
+      "type": "chat"
+    },
+    {
+      "id": "aisingapore/sea-lion-7b-instruct",
+      "owned_by": "aisingapore",
+      "params": "7B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "baai/bge-m3",
+      "owned_by": "baai",
+      "params": "—",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "bigcode/starcoder2-15b",
+      "owned_by": "bigcode",
+      "params": "15B",
+      "context": "16K",
+      "type": "chat"
+    },
+    {
+      "id": "bytedance/seed-oss-36b-instruct",
+      "owned_by": "bytedance",
+      "params": "36B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "databricks/dbrx-instruct",
+      "owned_by": "databricks",
+      "params": "132B/36B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-ai/deepseek-coder-6.7b-instruct",
+      "owned_by": "deepseek-ai",
+      "params": "6.7B",
+      "context": "4K",
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-ai/deepseek-v4-flash",
+      "owned_by": "deepseek-ai",
+      "params": "284B/13B",
+      "context": "1M",
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-ai/deepseek-v4-pro",
+      "owned_by": "deepseek-ai",
+      "params": "1.6T/49B",
+      "context": "1M",
+      "type": "chat"
+    },
+    {
+      "id": "google/codegemma-1.1-7b",
+      "owned_by": "google",
+      "params": "7B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "google/codegemma-7b",
+      "owned_by": "google",
+      "params": "7B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "google/deplot",
+      "owned_by": "google",
+      "params": "0.5B",
+      "context": "—",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-2-2b-it",
+      "owned_by": "google",
+      "params": "2B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-2b",
+      "owned_by": "google",
+      "params": "2B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-3-12b-it",
+      "owned_by": "google",
+      "params": "12B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-3-4b-it",
+      "owned_by": "google",
+      "params": "4B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-3n-e2b-it",
+      "owned_by": "google",
+      "params": "2B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-3n-e4b-it",
+      "owned_by": "google",
+      "params": "4B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-4-31b-it",
+      "owned_by": "google",
+      "params": "31B",
+      "context": "256K",
+      "type": "chat"
+    },
+    {
+      "id": "google/recurrentgemma-2b",
+      "owned_by": "google",
+      "params": "2B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "ibm/granite-3.0-3b-a800m-instruct",
+      "owned_by": "ibm",
+      "params": "3B/800M",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "ibm/granite-3.0-8b-instruct",
+      "owned_by": "ibm",
+      "params": "8B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "ibm/granite-34b-code-instruct",
+      "owned_by": "ibm",
+      "params": "34B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "ibm/granite-8b-code-instruct",
+      "owned_by": "ibm",
+      "params": "8B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "meta/codellama-70b",
+      "owned_by": "meta",
+      "params": "70B",
+      "context": "16K",
+      "type": "chat"
+    },
+    {
+      "id": "meta/llama-3.1-70b-instruct",
+      "owned_by": "meta",
+      "params": "70B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "meta/llama-3.1-8b-instruct",
+      "owned_by": "meta",
+      "params": "8B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "meta/llama-3.2-11b-vision-instruct",
+      "owned_by": "meta",
+      "params": "11B",
+      "context": "128K",
+      "type": "vision"
+    },
+    {
+      "id": "meta/llama-3.2-1b-instruct",
+      "owned_by": "meta",
+      "params": "1B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "meta/llama-3.2-3b-instruct",
+      "owned_by": "meta",
+      "params": "3B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "meta/llama-3.2-90b-vision-instruct",
+      "owned_by": "meta",
+      "params": "90B",
+      "context": "128K",
+      "type": "vision"
+    },
+    {
+      "id": "meta/llama-3.3-70b-instruct",
+      "owned_by": "meta",
+      "params": "70B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "meta/llama-4-maverick-17b-128e-instruct",
+      "owned_by": "meta",
+      "params": "400B/17B",
+      "context": "1M",
+      "type": "chat"
+    },
+    {
+      "id": "meta/llama-guard-4-12b",
+      "owned_by": "meta",
+      "params": "12B",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "meta/llama2-70b",
+      "owned_by": "meta",
+      "params": "70B",
+      "context": "4K",
+      "type": "chat"
+    },
+    {
+      "id": "microsoft/kosmos-2",
+      "owned_by": "microsoft",
+      "params": "—",
+      "context": "—",
+      "type": "vision"
+    },
+    {
+      "id": "microsoft/phi-3-vision-128k-instruct",
+      "owned_by": "microsoft",
+      "params": "4.2B",
+      "context": "128K",
+      "type": "vision"
+    },
+    {
+      "id": "microsoft/phi-3.5-moe-instruct",
+      "owned_by": "microsoft",
+      "params": "42B/6.6B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "microsoft/phi-4-mini-instruct",
+      "owned_by": "microsoft",
+      "params": "3.8B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "microsoft/phi-4-multimodal-instruct",
+      "owned_by": "microsoft",
+      "params": "5.6B",
+      "context": "128K",
+      "type": "vision"
+    },
+    {
+      "id": "minimaxai/minimax-m2.7",
+      "owned_by": "minimaxai",
+      "params": "230B",
+      "context": "200K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/codestral-22b-instruct-v0.1",
+      "owned_by": "mistralai",
+      "params": "22B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/ministral-14b-instruct-2512",
+      "owned_by": "mistralai",
+      "params": "14B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mistral-7b-instruct-v0.3",
+      "owned_by": "mistralai",
+      "params": "7B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mistral-large",
+      "owned_by": "mistralai",
+      "params": "—",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mistral-large-2-instruct",
+      "owned_by": "mistralai",
+      "params": "123B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mistral-large-3-675b-instruct-2512",
+      "owned_by": "mistralai",
+      "params": "675B/41B",
+      "context": "262K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mistral-medium-3.5-128b",
+      "owned_by": "mistralai",
+      "params": "128B",
+      "context": "256K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mistral-nemotron",
+      "owned_by": "mistralai",
+      "params": "—",
+      "context": "—",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mistral-small-4-119b-2603",
+      "owned_by": "mistralai",
+      "params": "119B/6B",
+      "context": "256K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mixtral-8x22b-v0.1",
+      "owned_by": "mistralai",
+      "params": "141B/39B",
+      "context": "64K",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/mixtral-8x7b-instruct-v0.1",
+      "owned_by": "mistralai",
+      "params": "47B/13B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "owned_by": "moonshotai",
+      "params": "~1.2T/32B",
+      "context": "256K",
+      "type": "chat"
+    },
+    {
+      "id": "nv-mistralai/mistral-nemo-12b-instruct",
+      "owned_by": "nv-mistralai",
+      "params": "12B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/ai-synthetic-video-detector",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "nvidia/cosmos-reason2-8b",
+      "owned_by": "nvidia",
+      "params": "8B",
+      "context": "—",
+      "type": "vision"
+    },
+    {
+      "id": "nvidia/embed-qa-4",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/gliner-pii",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "nvidia/ising-calibration-1-35b-a3b",
+      "owned_by": "nvidia",
+      "params": "1.35B",
+      "context": "—",
+      "type": "other"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemoguard-8b-content-safety",
+      "owned_by": "nvidia",
+      "params": "8B",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemoguard-8b-topic-control",
+      "owned_by": "nvidia",
+      "params": "8B",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemotron-51b-instruct",
+      "owned_by": "nvidia",
+      "params": "51B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemotron-70b-instruct",
+      "owned_by": "nvidia",
+      "params": "70B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemotron-nano-8b-v1",
+      "owned_by": "nvidia",
+      "params": "8B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemotron-nano-vl-8b-v1",
+      "owned_by": "nvidia",
+      "params": "8B",
+      "context": "—",
+      "type": "vision"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
+      "owned_by": "nvidia",
+      "params": "8B",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
+      "owned_by": "nvidia",
+      "params": "253B",
+      "context": "—",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1",
+      "owned_by": "nvidia",
+      "params": "1B",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/llama-3.2-nv-embedqa-1b-v1",
+      "owned_by": "nvidia",
+      "params": "1B",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/llama-3.3-nemotron-super-49b-v1",
+      "owned_by": "nvidia",
+      "params": "49B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+      "owned_by": "nvidia",
+      "params": "49B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/llama-nemotron-embed-1b-v2",
+      "owned_by": "nvidia",
+      "params": "1B",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+      "owned_by": "nvidia",
+      "params": "1B",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/llama3-chatqa-1.5-70b",
+      "owned_by": "nvidia",
+      "params": "70B",
+      "context": "16K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/mistral-nemo-minitron-8b-8k-instruct",
+      "owned_by": "nvidia",
+      "params": "8B",
+      "context": "8K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/nemoretriever-parse",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "other"
+    },
+    {
+      "id": "nvidia/nemotron-3-content-safety",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-30b-a3b",
+      "owned_by": "nvidia",
+      "params": "30B/3.2B",
+      "context": "262K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "owned_by": "nvidia",
+      "params": "30B/3.2B",
+      "context": "256K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/nemotron-3-super-120b-a12b",
+      "owned_by": "nvidia",
+      "params": "120B/12B",
+      "context": "262K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/nemotron-4-340b-instruct",
+      "owned_by": "nvidia",
+      "params": "340B",
+      "context": "4K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/nemotron-4-340b-reward",
+      "owned_by": "nvidia",
+      "params": "340B",
+      "context": "—",
+      "type": "other"
+    },
+    {
+      "id": "nvidia/nemotron-content-safety-reasoning-4b",
+      "owned_by": "nvidia",
+      "params": "4B",
+      "context": "—",
+      "type": "safety"
+    },
+    {
+      "id": "nvidia/nemotron-mini-4b-instruct",
+      "owned_by": "nvidia",
+      "params": "4B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/nemotron-nano-12b-v2-vl",
+      "owned_by": "nvidia",
+      "params": "12B",
+      "context": "—",
+      "type": "vision"
+    },
+    {
+      "id": "nvidia/nemotron-nano-3-30b-a3b",
+      "owned_by": "nvidia",
+      "params": "30B/3.2B",
+      "context": "262K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/nemotron-parse",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "other"
+    },
+    {
+      "id": "nvidia/neva-22b",
+      "owned_by": "nvidia",
+      "params": "22B",
+      "context": "4K",
+      "type": "vision"
+    },
+    {
+      "id": "nvidia/nv-embed-v1",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/nv-embedcode-7b-v1",
+      "owned_by": "nvidia",
+      "params": "7B",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/nv-embedqa-e5-v5",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/nv-embedqa-mistral-7b-v2",
+      "owned_by": "nvidia",
+      "params": "7B",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "nvidia/nvclip",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "vision"
+    },
+    {
+      "id": "nvidia/nvidia-nemotron-nano-9b-v2",
+      "owned_by": "nvidia",
+      "params": "9B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/riva-translate-4b-instruct",
+      "owned_by": "nvidia",
+      "params": "4B",
+      "context": "—",
+      "type": "speech"
+    },
+    {
+      "id": "nvidia/riva-translate-4b-instruct-v1.1",
+      "owned_by": "nvidia",
+      "params": "4B",
+      "context": "—",
+      "type": "speech"
+    },
+    {
+      "id": "nvidia/vila",
+      "owned_by": "nvidia",
+      "params": "—",
+      "context": "—",
+      "type": "vision"
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "owned_by": "openai",
+      "params": "120B/5.1B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "owned_by": "openai",
+      "params": "21B/3.6B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "qwen/qwen3-coder-480b-a35b-instruct",
+      "owned_by": "qwen",
+      "params": "480B/35B",
+      "context": "262K",
+      "type": "chat"
+    },
+    {
+      "id": "qwen/qwen3-next-80b-a3b-instruct",
+      "owned_by": "qwen",
+      "params": "80B/3B",
+      "context": "65K",
+      "type": "chat"
+    },
+    {
+      "id": "qwen/qwen3.5-122b-a10b",
+      "owned_by": "qwen",
+      "params": "122B/10B",
+      "context": "262K",
+      "type": "chat"
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "owned_by": "qwen",
+      "params": "397B/17B",
+      "context": "262K",
+      "type": "chat"
+    },
+    {
+      "id": "sarvamai/sarvam-m",
+      "owned_by": "sarvamai",
+      "params": "—",
+      "context": "—",
+      "type": "chat"
+    },
+    {
+      "id": "snowflake/arctic-embed-l",
+      "owned_by": "snowflake",
+      "params": "—",
+      "context": "—",
+      "type": "embedding"
+    },
+    {
+      "id": "stepfun-ai/step-3.5-flash",
+      "owned_by": "stepfun-ai",
+      "params": "—",
+      "context": "—",
+      "type": "chat"
+    },
+    {
+      "id": "stockmark/stockmark-2-100b-instruct",
+      "owned_by": "stockmark",
+      "params": "100B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "upstage/solar-10.7b-instruct",
+      "owned_by": "upstage",
+      "params": "10.7B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "writer/palmyra-creative-122b",
+      "owned_by": "writer",
+      "params": "122B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "writer/palmyra-fin-70b-32k",
+      "owned_by": "writer",
+      "params": "70B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "writer/palmyra-med-70b",
+      "owned_by": "writer",
+      "params": "70B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "writer/palmyra-med-70b-32k",
+      "owned_by": "writer",
+      "params": "70B",
+      "context": "32K",
+      "type": "chat"
+    },
+    {
+      "id": "z-ai/glm-5.1",
+      "owned_by": "z-ai",
+      "params": "754B/~45B",
+      "context": "128K",
+      "type": "chat"
+    },
+    {
+      "id": "zyphra/zamba2-7b-instruct",
+      "owned_by": "zyphra",
+      "params": "7B",
+      "context": "128K",
+      "type": "chat"
+    }
+  ],
+  "test_results": {
+    "meta/llama-3.3-70b-instruct": {
+      "status": "ok",
+      "response": "Vier",
+      "model_used": "meta/llama-3.3-70b-instruct",
+      "usage": {
+        "prompt_tokens": 46,
+        "total_tokens": 49,
+        "completion_tokens": 3,
+        "prompt_tokens_details": null
+      }
+    },
+    "z-ai/glm-5.1": {
+      "status": "error",
+      "detail": "The read operation timed out"
+    },
+    "microsoft/phi-4-mini-instruct": {
+      "status": "error",
+      "detail": "The read operation timed out"
+    },
+    "qwen/qwen3-coder-480b-a35b-instruct": {
+      "status": "ok",
+      "response": "4",
+      "model_used": "qwen/qwen3-coder-480b-a35b-instruct",
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 2,
+        "total_tokens": 21,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 19
+        }
+      }
+    },
+    "openai/gpt-oss-20b": {
+      "status": "error",
+      "detail": "'NoneType' object is not subscriptable"
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "status": "ok",
+      "response": "The user asks: \"Antworte in einem",
+      "model_used": "nvidia/nemotron-3-super-120b-a12b",
+      "usage": {
+        "prompt_tokens": 27,
+        "total_tokens": 37,
+        "completion_tokens": 10,
+        "prompt_tokens_details": null
+      }
+    },
+    "deepseek-ai/deepseek-v4-flash": {
+      "status": "ok",
+      "response": "Vier",
+      "model_used": "deepseek-ai/deepseek-v4-flash",
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 18,
+        "completion_tokens": 3,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      }
+    },
+    "moonshotai/kimi-k2.6": {
+      "status": "error",
+      "detail": "The read operation timed out"
+    },
+    "minimaxai/minimax-m2.7": {
+      "status": "ok",
+      "response": "",
+      "model_used": "minimaxai/minimax-m2.7",
+      "usage": {
+        "prompt_tokens": 49,
+        "completion_tokens": 10,
+        "total_tokens": 59,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 16
+        }
+      }
+    },
+    "mistralai/mistral-small-4-119b-2603": {
+      "status": "ok",
+      "response": "Vier",
+      "model_used": "mistralai/mistral-small-4-119b-2603",
+      "usage": {
+        "prompt_tokens": 26,
+        "total_tokens": 29,
+        "completion_tokens": 3,
+        "prompt_tokens_details": null
+      }
+    },
+    "mistralai/ministral-14b-instruct-2512": {
+      "status": "ok",
+      "response": "Vier",
+      "model_used": "stg/mistralai/ministral-14b-instruct-2512",
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 17,
+        "completion_tokens": 3,
+        "prompt_tokens_details": null
+      }
+    }
+  }
+}

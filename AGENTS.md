@@ -1,6 +1,6 @@
 # AGENTS.md — litellm-gateway
 
-Single-Service LiteLLM-Deployment hinter NGINX, proxying an die NVIDIA NIM API (Llama 3.1 70B). Läuft auf einem entfernten VPS unter `/www/wwwroot/gateway.ftbot.de/`.
+Single-Service LiteLLM-Deployment hinter NGINX, proxying 5 Modelle an die NVIDIA NIM API (Llama 3.3, DeepSeek V4 Pro, Phi-4-Mini, Qwen3-Coder-480B, DeepSeek V4 Flash). Läuft auf einem entfernten VPS unter `/www/wwwroot/gateway.ftbot.de/`.
 
 ## Architektur
 
@@ -19,9 +19,56 @@ OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Por
 | Datei | Zweck |
 |---|---|
 | `docker-compose.yml` | Zwei Services: `postgres` (16-alpine) + `litellm-gateway` (offizielles LiteLLM-Image), DB-Volume, Config per Volume-Mount |
-| `litellm-config.yaml` | 2 Modell-Aliase (`nim-llama`, `default`) → NVIDIA NIM; keine Retries, keine Telemetrie, lokale Queue |
+| `litellm-config.yaml` | 5 Modell-Aliase (nim-llama→llama-3.3, default→deepseek-v4-pro, fast→phi-4-mini, power→qwen3-coder-480b, coding→deepseek-v4-flash) |
+| `llm-toplist.md` | Rangliste Top-3 pro Rolle mit Benchmarks (aus good.json + bench.json) |
 | `.env.example` | Erforderliche Variablen: `NVIDIA_API_KEY`, `LITELLM_MASTER_KEY`, `UI_USERNAME`, `UI_PASSWORD`, `OPENCODE_API_KEY`, `DOMAIN` |
 | `opencode.json.example` | OpenCode-Client-Konfiguration für das Gateway |
+
+### Test-Skripte (universal, provider-agnostisch)
+
+| Datei | Zweck |
+|---|---|
+| `scripts/config.json` | **Provider-Konfiguration** — API-Base-URL, Auth, Rate Limits, Timeouts pro Anbieter |
+| `scripts/provider_api.py` | **Shared Library** — lädt Config, erzeugt OpenAI-Client, lädt Modelldaten |
+| `scripts/phase1_quick_test.py` | **Phase 1**: 1-Token Health-Check aller Modelle (-> `phase1_results_{provider}.json`) |
+| `scripts/test_models.py` | **Phase 2**: Streaming, Tool Calling, Max Output für OK-Modelle (-> `phase2_summary_{provider}.md`) |
+| `scripts/known_specs_{provider}.json` | **Modell-Metadaten** pro Provider (Parameter, Context, Typ) |
+| `scripts/bench.json` | **Benchmark-Daten** (45 Benchmarks, 438 Modelle aus Scale AI + swebench.com + SWE-bench Pro) |
+| `scripts/fetch_scale_leaderboard.py` | Extrahiert 38 Benchmarks aus dem Scale AI Leaderboard (RSC Payload) |
+| `scripts/fetch_swebench.py` | Extrahiert 6 SWE-bench Leaderboards (Verified, bash-only, Multilingual, etc.) |
+| `scripts/rank_models.py` | Rangliste Top-3 pro OpenCode-Alias aus good.json |
+| `scripts/update_benchmarks_in_good.py` | Merged bench.json → good.json |
+| `scripts/restore_lost_benchmarks.py` | Stellt alte Benchmark-Daten wieder her |
+
+### NVIDIA NIM spezifisch
+
+| Datei | Zweck |
+|---|---|
+| `scripts/NIM_API_REFERENCE.md` | NVIDIA NIM API Referenz (Endpoints, Env Vars) |
+| `scripts/NIM_FAILURE_LOG.md` | Log aller 404/410/Timeout Modelle |
+| `scripts/phase1_results.json` | Phase 1 NVIDIA Ergebnisse (Legacy) |
+| `scripts/phase1_results_nvidia-nim.json` | Phase 1 NVIDIA Ergebnisse (neues Format) |
+
+## Script Usage
+
+```bash
+# Phase 1: Health-Check aller Modelle
+$env:NVIDIA_API_KEY = "nvapi-..."
+python scripts/phase1_quick_test.py --provider nvidia-nim
+
+# Phase 2: Detailtests (nur OK-Modelle)
+python scripts/test_models.py --provider nvidia-nim
+```
+
+Bei neuem Provider: `config.json` erweitern, `known_specs_{provider}.json` anlegen, `--provider name` übergeben.
+
+## OpenCode Skill: API Error Handling
+
+Ein permanenter Skill unter `~/.config/opencode/skills/api-error-handling/SKILL.md`
+dokumentiert die HTTP-Fehlerklassifikation für KI-APIs. Enthält:
+- Bedeutung von 404, 401, 403, 429, 500
+- `openai`-Exception-Hierarchie (NotFoundError, RateLimitError, etc.)
+- Python-Codebeispiele für try-except, Model-Liste, Raw-Response-Header
 
 ## Verifikation
 
@@ -31,6 +78,7 @@ curl -s https://$DOMAIN/v1/chat/completions \
   -H "Authorization: Bearer $OPENCODE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model":"nim-llama","messages":[{"role":"user","content":"Test"}]}'
+# Teste weitere Aliase: default, fast, power, coding
 ```
 
 ## Container-Neustart
@@ -44,6 +92,9 @@ docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml logs -f
 ## Fallstricke
 
 - `docker.litellm.ai` erlaubt anonyme Pulls (kein Login nötig)
+- Alle Skripte nutzen die `openai`-Bibliothek (v2.x) statt `urllib` — muss installiert sein: `pip install openai`
+- `openai`-Exception-Hierarchie: `APIError` → `APIStatusError` (404=NotFoundError, 429=RateLimitError, etc.), `APITimeoutError`, `APIConnectionError`
+- Rate-Limit-Header via `client.with_raw_response.chat.completions.create(...)` → `raw.headers`
 
 ## CI/CD (GitHub Actions)
 

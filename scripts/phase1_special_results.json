@@ -1,0 +1,132 @@
+{
+  "provider": "nvidia-nim",
+  "tested_at": "2026-05-25T01:58:10",
+  "results": {
+    "google/gemma-4-31b-it": {
+      "best_result": {
+        "status": "T/O",
+        "detail": "Timeout after 60s",
+        "latency_s": 60.2,
+        "build_status": "Free Endpoint",
+        "timeout_setting": 60,
+        "test_category": "T/O (30s) → retry 60s",
+        "extra_params": null
+      },
+      "all_categories": {
+        "T/O (30s) → retry 60s": {
+          "status": "T/O",
+          "detail": "Timeout after 60s",
+          "latency_s": 60.2,
+          "build_status": "Free Endpoint",
+          "timeout_setting": 60,
+          "test_category": "T/O (30s) → retry 60s",
+          "extra_params": null
+        }
+      },
+      "verdict": "⏰ T/O bei 60s → Serverkapazität",
+      "build_status": "Free Endpoint"
+    },
+    "nvidia/ai-synthetic-video-detector": {
+      "best_result": {
+        "status": "HTTP500",
+        "http": 500,
+        "detail": "{\"type\":\"urn:nvcf-worker-service:problem-details:internal-server-error\",\"title\":\"Internal Server Err",
+        "latency_s": 0.28,
+        "build_status": "Free Endpoint",
+        "timeout_setting": 15,
+        "test_category": "HTTP500 → synthetic-video-detector (Dokumentation)",
+        "extra_params": null
+      },
+      "all_categories": {
+        "HTTP500 → synthetic-video-detector (Dokumentation)": {
+          "status": "HTTP500",
+          "http": 500,
+          "detail": "{\"type\":\"urn:nvcf-worker-service:problem-details:internal-server-error\",\"title\":\"Internal Server Err",
+          "latency_s": 0.28,
+          "build_status": "Free Endpoint",
+          "timeout_setting": 15,
+          "test_category": "HTTP500 → synthetic-video-detector (Dokumentation)",
+          "extra_params": null
+        }
+      },
+      "verdict": "⚠️ HTTP500 — FALSCHER TEST: Kein Chat-Modell, erwartet Video-Input via gRPC",
+      "build_status": "Free Endpoint"
+    },
+    "nvidia/nemoretriever-parse": {
+      "best_result": {
+        "status": "HTTP400",
+        "http": 400,
+        "detail": "{\"object\":\"error\",\"message\":\"Content cannot be a plain string. The model does not support text input",
+        "latency_s": 0.34,
+        "build_status": "?",
+        "timeout_setting": 30,
+        "test_category": "HTTP400 → structured content format (nemoretriever/nemotron)",
+        "extra_params": null
+      },
+      "all_categories": {
+        "HTTP400 → structured content format (nemoretriever/nemotron)": {
+          "status": "HTTP400",
+          "http": 400,
+          "detail": "{\"object\":\"error\",\"message\":\"Content cannot be a plain string. The model does not support text input",
+          "latency_s": 0.34,
+          "build_status": "?",
+          "timeout_setting": 30,
+          "test_category": "HTTP400 → structured content format (nemoretriever/nemotron)",
+          "extra_params": null
+        }
+      },
+      "verdict": "⚠️ HTTP400 — FALSCHER TEST: {\"object\":\"error\",\"message\":\"Content cannot be a plain string. The model does no",
+      "build_status": "?"
+    },
+    "nvidia/nemotron-parse": {
+      "best_result": {
+        "status": "HTTP400",
+        "http": 400,
+        "detail": "{\"object\":\"error\",\"message\":\"Content cannot be a plain string. The model does not support text input",
+        "latency_s": 0.31,
+        "build_status": "?",
+        "timeout_setting": 30,
+        "test_category": "HTTP400 → structured content format (nemoretriever/nemotron)",
+        "extra_params": null
+      },
+      "all_categories": {
+        "HTTP400 → structured content format (nemoretriever/nemotron)": {
+          "status": "HTTP400",
+          "http": 400,
+          "detail": "{\"object\":\"error\",\"message\":\"Content cannot be a plain string. The model does not support text input",
+          "latency_s": 0.31,
+          "build_status": "?",
+          "timeout_setting": 30,
+          "test_category": "HTTP400 → structured content format (nemoretriever/nemotron)",
+          "extra_params": null
+        }
+      },
+      "verdict": "⚠️ HTTP400 — FALSCHER TEST: {\"object\":\"error\",\"message\":\"Content cannot be a plain string. The model does no",
+      "build_status": "?"
+    },
+    "qwen/qwen3-next-80b-a3b-instruct": {
+      "best_result": {
+        "status": "T/O",
+        "detail": "Timeout after 60s",
+        "latency_s": 60.18,
+        "build_status": "Downloadable (nur Self-Hosted)",
+        "timeout_setting": 60,
+        "test_category": "T/O (30s) → retry 60s",
+        "extra_params": null
+      },
+      "all_categories": {
+        "T/O (30s) → retry 60s": {
+          "status": "T/O",
+          "detail": "Timeout after 60s",
+          "latency_s": 60.18,
+          "build_status": "Downloadable (nur Self-Hosted)",
+          "timeout_setting": 60,
+          "test_category": "T/O (30s) → retry 60s",
+          "extra_params": null
+        }
+      },
+      "verdict": "⏰ T/O auch bei 60s → Modell ist 'Downloadable', wahrscheinlich NICHT auf hosted API verfügbar (siehe build.nvidia.com)",
+      "build_status": "Downloadable (nur Self-Hosted)"
+    },
+  }
+}

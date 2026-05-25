@@ -1,0 +1,3014 @@
+{
+  "provider": "nvidia-nim",
+  "generated_at": "2026-05-25T00:37:02.974334+00:00",
+  "models": {
+    "01-ai/yi-large": {
+      "specs": {
+        "p": "34B",
+        "c": "4K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "abacusai/dracarys-llama-3.1-70b-instruct": {
+      "specs": {
+        "p": "70B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "T/O",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": null,
+        "detail": "Request timed out."
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.46,
+        "tool": true,
+        "max_out": 126
+      }
+    },
+    "adept/fuyu-8b": {
+      "specs": {
+        "p": "8B",
+        "c": "8K",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "ai21labs/jamba-1.5-large-instruct": {
+      "specs": {
+        "p": "398B/60B",
+        "c": "256K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "aisingapore/sea-lion-7b-instruct": {
+      "specs": {
+        "p": "7B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "baai/bge-m3": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "bigcode/starcoder2-15b": {
+      "specs": {
+        "p": "15B",
+        "c": "16K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "databricks/dbrx-instruct": {
+      "specs": {
+        "p": "132B/36B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "deepseek-ai/deepseek-coder-6.7b-instruct": {
+      "specs": {
+        "p": "6.7B",
+        "c": "4K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 9.0
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "deepseek-ai/deepseek-v4-flash": {
+      "specs": {
+        "p": "284B/13B",
+        "c": "1M",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "swe_ver": "79%",
+        "lcb": "91.6%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 1.05,
+        "tokens": 6,
+        "model_used": "deepseek-ai/deepseek-v4-flash",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.96,
+        "tool": true,
+        "max_out": 110
+      }
+    },
+    "deepseek-ai/deepseek-v4-pro": {
+      "specs": {
+        "p": "1.6T/49B",
+        "c": "1M",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "swe_ver": "80.6%",
+        "mmlu": "87.9",
+        "lcb": "93.5%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 1.61,
+        "tokens": 6,
+        "model_used": "deepseek-ai/deepseek-v4-pro",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 4.56,
+        "tool": false,
+        "max_out": 98
+      }
+    },
+    "google/codegemma-1.1-7b": {
+      "specs": {
+        "p": "7B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "google/codegemma-7b": {
+      "specs": {
+        "p": "7B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "google/deplot": {
+      "specs": {
+        "p": "0.5B",
+        "c": "â€”",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "google/gemma-2-2b-it": {
+      "specs": {
+        "p": "2B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.26,
+        "tokens": 11,
+        "model_used": "?",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.31,
+        "tool": false,
+        "max_out": 114
+      }
+    },
+    "google/gemma-2b": {
+      "specs": {
+        "p": "2B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "google/gemma-3-12b-it": {
+      "specs": {
+        "p": "12B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "google/gemma-3-4b-it": {
+      "specs": {
+        "p": "4B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "google/gemma-3n-e2b-it": {
+      "specs": {
+        "p": "2B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.41,
+        "tokens": 11,
+        "model_used": "google/gemma-3n-e2b-it",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.3,
+        "tool": false,
+        "max_out": 107
+      }
+    },
+    "google/gemma-3n-e4b-it": {
+      "specs": {
+        "p": "4B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.37,
+        "tokens": 11,
+        "model_used": "google/gemma-3n-e4b-it",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.34,
+        "tool": false,
+        "max_out": 89
+      }
+    },
+    "google/gemma-4-31b-it": {
+      "specs": {
+        "p": "31B",
+        "c": "256K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "T/O",
+        "http": null,
+        "detail": "Request timed out after 90s - unreliable model"
+      }
+    },
+    "google/recurrentgemma-2b": {
+      "specs": {
+        "p": "2B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "ibm/granite-3.0-3b-a800m-instruct": {
+      "specs": {
+        "p": "3B/800M",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "ibm/granite-3.0-8b-instruct": {
+      "specs": {
+        "p": "8B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        },
+        "he": "89.7%"
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "ibm/granite-34b-code-instruct": {
+      "specs": {
+        "p": "34B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "ibm/granite-8b-code-instruct": {
+      "specs": {
+        "p": "8B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "meta/codellama-70b": {
+      "specs": {
+        "p": "70B",
+        "c": "16K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "meta/llama-3.1-70b-instruct": {
+      "specs": {
+        "p": "70B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        },
+        "swe_ver": "~65%",
+        "mmlu": "86.4%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.84,
+        "tokens": 37,
+        "model_used": "meta/llama-3.1-70b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.47,
+        "tool": true,
+        "max_out": 118
+      }
+    },
+    "meta/llama-3.1-8b-instruct": {
+      "specs": {
+        "p": "8B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        },
+        "gsm8k": "84.5%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.48,
+        "tokens": 37,
+        "model_used": "meta/llama-3.1-8b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.51,
+        "tool": true,
+        "max_out": 116
+      }
+    },
+    "meta/llama-3.2-11b-vision-instruct": {
+      "specs": {
+        "p": "11B",
+        "c": "128K",
+        "t": "vision",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.27,
+        "tokens": 37,
+        "model_used": "meta/llama-3.2-11b-vision-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.31,
+        "tool": true,
+        "max_out": 140
+      }
+    },
+    "meta/llama-3.2-1b-instruct": {
+      "specs": {
+        "p": "1B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.26,
+        "tokens": 12,
+        "model_used": "meta/llama-3.2-1b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 1.89,
+        "tool": false,
+        "max_out": null
+      }
+    },
+    "meta/llama-3.2-3b-instruct": {
+      "specs": {
+        "p": "3B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.25,
+        "tokens": 37,
+        "model_used": "meta/llama-3.2-3b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.28,
+        "tool": false,
+        "max_out": 132
+      }
+    },
+    "meta/llama-3.2-90b-vision-instruct": {
+      "specs": {
+        "p": "90B",
+        "c": "128K",
+        "t": "vision",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 4.11,
+        "tokens": 37,
+        "model_used": "meta/llama-3.2-90b-vision-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.42,
+        "tool": true,
+        "max_out": 125
+      }
+    },
+    "meta/llama-3.3-70b-instruct": {
+      "specs": {
+        "p": "70B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        },
+        "swe_ver": "~72%",
+        "mmlu": "89.2%",
+        "he": "88.4%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 2.17,
+        "tokens": 37,
+        "model_used": "meta/llama-3.3-70b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.47,
+        "tool": true,
+        "max_out": 122
+      }
+    },
+    "meta/llama-4-maverick-17b-128e-instruct": {
+      "specs": {
+        "p": "400B/17B",
+        "c": "1M",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "SWE-bench bash-only": {
+          "score": 21.04
+        },
+        "swe_pro": "5.24",
+        "swe_ver": "32%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 12.02,
+        "tokens": 12,
+        "model_used": "meta/llama-4-maverick-17b-128e-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 2.39,
+        "tool": true,
+        "max_out": 105
+      }
+    },
+    "meta/llama-guard-4-12b": {
+      "specs": {
+        "p": "12B",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 9.06
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.28,
+        "tokens": 205,
+        "model_used": "meta/llama-guard-4-12b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.3,
+        "tool": false,
+        "max_out": 2
+      }
+    },
+    "meta/llama2-70b": {
+      "specs": {
+        "p": "70B",
+        "c": "4K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "microsoft/kosmos-2": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "microsoft/phi-3-vision-128k-instruct": {
+      "specs": {
+        "p": "4.2B",
+        "c": "128K",
+        "t": "vision"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "microsoft/phi-3.5-moe-instruct": {
+      "specs": {
+        "p": "42B/6.6B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "microsoft/phi-4-mini-instruct": {
+      "specs": {
+        "p": "3.8B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "16K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 21.04
+        },
+        "gsm8k": "88.6%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.3,
+        "tokens": 5,
+        "model_used": "microsoft/phi-4-mini-instruct",
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": false,
+        "stream_lat": 0,
+        "tool": false,
+        "max_out": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": null
+      }
+    },
+    "microsoft/phi-4-multimodal-instruct": {
+      "specs": {
+        "p": "5.6B",
+        "c": "128K",
+        "t": "vision",
+        "max_o": "16K"
+      },
+      "benchmarks": {
+        "SWE-bench bash-only": {
+          "score": 21.04
+        }
+      },
+      "phase1": {
+        "status": "T/O",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": null,
+        "detail": "Request timed out."
+      },
+      "phase2": {
+        "stream": false,
+        "stream_lat": 0,
+        "tool": false,
+        "max_out": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": null
+      }
+    },
+    "minimaxai/minimax-m2.7": {
+      "specs": {
+        "p": "230B",
+        "c": "200K",
+        "t": "chat",
+        "max_o": "16K"
+      },
+      "benchmarks": {
+        "SWE-bench bash-only": {
+          "score": 75.8
+        }
+      },
+      "phase1": {
+        "status": "T/O",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": null,
+        "detail": "Request timed out."
+      },
+      "phase2": {
+        "stream": false,
+        "stream_lat": 0,
+        "tool": true,
+        "max_out": 200,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "length"
+      }
+    },
+    "mistralai/codestral-22b-instruct-v0.1": {
+      "specs": {
+        "p": "22B",
+        "c": "32K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "mistralai/ministral-14b-instruct-2512": {
+      "specs": {
+        "p": "14B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.25,
+        "tokens": 5,
+        "model_used": "stg/mistralai/ministral-14b-instruct-2512",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.31,
+        "tool": true,
+        "max_out": 143,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "mistralai/mistral-7b-instruct-v0.3": {
+      "specs": {
+        "p": "7B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.24,
+        "tokens": 5,
+        "model_used": "mistralai/mistral-7b-instruct-v0.3",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.33,
+        "tool": true,
+        "max_out": 117,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "mistralai/mistral-large": {
+      "specs": {
+        "p": "â€”",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "mistralai/mistral-large-2-instruct": {
+      "specs": {
+        "p": "123B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "mistralai/mistral-large-3-675b-instruct-2512": {
+      "specs": {
+        "p": "675B/41B",
+        "c": "262K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "mmlu": "85.5%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.37,
+        "tokens": 5,
+        "model_used": "mistralai/mistral-large-3-675b-instruct-2512",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.42,
+        "tool": true,
+        "max_out": 114,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "mistralai/mistral-medium-3.5-128b": {
+      "specs": {
+        "p": "128B",
+        "c": "256K",
+        "t": "chat",
+        "max_o": "16K"
+      },
+      "benchmarks": {
+        "SWE-bench bash-only": {
+          "score": 66.0
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 23.4,
+        "tokens": 17,
+        "model_used": "mistralai/mistral-medium-3.5-128b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 30.42,
+        "tool": true,
+        "max_out": 106,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "mistralai/mistral-nemotron": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.47,
+        "tokens": 5,
+        "model_used": "mistralai/mistral-nemotron",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.54,
+        "tool": true,
+        "max_out": 99,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "mistralai/mistral-small-4-119b-2603": {
+      "specs": {
+        "p": "119B/6B",
+        "c": "256K",
+        "t": "chat",
+        "max_o": "16K"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.3,
+        "tokens": 17,
+        "model_used": "mistralai/mistral-small-4-119b-2603",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.39,
+        "tool": true,
+        "max_out": 128,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "mistralai/mixtral-8x22b-v0.1": {
+      "specs": {
+        "p": "141B/39B",
+        "c": "64K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "mmlu": "77.4%",
+        "gsm8k": "90%"
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "mistralai/mixtral-8x7b-instruct-v0.1": {
+      "specs": {
+        "p": "47B/13B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.3,
+        "tokens": 10,
+        "model_used": "stg/mistralai/mixtral-8x7b-instruct-v0.1",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.37,
+        "tool": false,
+        "max_out": 119,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "moonshotai/kimi-k2.6": {
+      "specs": {
+        "p": "~1.2T/32B",
+        "c": "256K",
+        "t": "chat",
+        "max_o": "16K"
+      },
+      "benchmarks": {
+        "SWE-bench bash-only": {
+          "score": 43.8
+        },
+        "swe_pro": "27.67",
+        "swe_ver": "80.2%",
+        "lcb": "89.6%",
+        "mcp_atlas": "64.4%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 9.33,
+        "tokens": 11,
+        "model_used": "moonshotai/kimi-k2.6",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": false,
+        "stream_lat": 0,
+        "tool": true,
+        "max_out": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": null
+      }
+    },
+    "nv-mistralai/mistral-nemo-12b-instruct": {
+      "specs": {
+        "p": "12B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/ai-synthetic-video-detector": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "HTTP500",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 500,
+        "detail": "Error code: 500 - {'type': 'urn:nvcf-worker-service:problem-details:internal-ser"
+      }
+    },
+    "nvidia/cosmos-reason2-8b": {
+      "specs": {
+        "p": "8B",
+        "c": "â€”",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/embed-qa-4": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/gliner-pii": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.38,
+        "tokens": 7,
+        "model_used": "nvidia/gliner-pii",
+        "fingerprint": null,
+        "finish_reason": "stop",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": false,
+        "stream_lat": 0.38,
+        "tool": false,
+        "max_out": 13,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/ising-calibration-1-35b-a3b": {
+      "specs": {
+        "p": "1.35B",
+        "c": "â€”",
+        "t": "other"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.34,
+        "tokens": 12,
+        "model_used": "nvidia/ising-calibration-1-35b-a3b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 1.43,
+        "tool": true,
+        "max_out": 200,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "length"
+      }
+    },
+    "nvidia/llama-3.1-nemoguard-8b-content-safety": {
+      "specs": {
+        "p": "8B",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.36,
+        "tokens": 397,
+        "model_used": "nvidia/llama-3.1-nemoguard-8b-content-safety",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.33,
+        "tool": false,
+        "max_out": 8,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/llama-3.1-nemoguard-8b-topic-control": {
+      "specs": {
+        "p": "8B",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.25,
+        "tokens": 74,
+        "model_used": "nvidia/llama-3.1-nemoguard-8b-topic-control",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.3,
+        "tool": false,
+        "max_out": 3,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/llama-3.1-nemotron-51b-instruct": {
+      "specs": {
+        "p": "51B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {
+        "Adversarial Robustness": {
+          "score": 10
+        },
+        "Math": {
+          "score": 95.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/llama-3.1-nemotron-70b-instruct": {
+      "specs": {
+        "p": "70B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/llama-3.1-nemotron-nano-8b-v1": {
+      "specs": {
+        "p": "8B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.58,
+        "tokens": 17,
+        "model_used": "nvidia/llama-3.1-nemotron-nano-8b-v1",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.46,
+        "tool": false,
+        "max_out": 137,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/llama-3.1-nemotron-nano-vl-8b-v1": {
+      "specs": {
+        "p": "8B",
+        "c": "â€”",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.34,
+        "tokens": 21,
+        "model_used": "nvidia/llama-3.1-nemotron-nano-vl-8b-v1",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.32,
+        "tool": false,
+        "max_out": 164,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/llama-3.1-nemotron-safety-guard-8b-v3": {
+      "specs": {
+        "p": "8B",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.27,
+        "tokens": 397,
+        "model_used": "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 8.08,
+        "tool": false,
+        "max_out": 9,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/llama-3.1-nemotron-ultra-253b-v1": {
+      "specs": {
+        "p": "253B",
+        "c": "â€”",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1": {
+      "specs": {
+        "p": "1B",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/llama-3.2-nemoretriever-300m-embed-v1": {
+      "specs": {
+        "p": "300M",
+        "c": "â€”",
+        "t": "reranking"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "http": 404,
+        "detail": "embedding model, not chat-compatible"
+      }
+    },
+    "nvidia/llama-3.2-nv-embedqa-1b-v1": {
+      "specs": {
+        "p": "1B",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/llama-3.3-nemotron-super-49b-v1": {
+      "specs": {
+        "p": "49B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.48,
+        "tokens": 21,
+        "model_used": "nvidia/llama-3.3-nemotron-super-49b-v1",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.44,
+        "tool": true,
+        "max_out": 115,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/llama-3.3-nemotron-super-49b-v1.5": {
+      "specs": {
+        "p": "49B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.38,
+        "tokens": 17,
+        "model_used": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.32,
+        "tool": true,
+        "max_out": 200,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "length"
+      }
+    },
+    "nvidia/llama-nemotron-embed-1b-v2": {
+      "specs": {
+        "p": "1B",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/llama-nemotron-embed-vl-1b-v2": {
+      "specs": {
+        "p": "1B",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/llama3-chatqa-1.5-70b": {
+      "specs": {
+        "p": "70B",
+        "c": "16K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 40.6
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/mistral-nemo-minitron-8b-8k-instruct": {
+      "specs": {
+        "p": "8B",
+        "c": "8K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nemoretriever-parse": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "other"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "HTTP400",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 400,
+        "detail": "Error code: 400 - {'object': 'error', 'message': 'Content cannot be a plain stri"
+      }
+    },
+    "nvidia/nemotron-3-content-safety": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.68,
+        "tokens": 427,
+        "model_used": "nvidia/nemotron-3-content-safety",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.26,
+        "tool": false,
+        "max_out": 5,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/nemotron-3-nano-30b-a3b": {
+      "specs": {
+        "p": "30B/3.2B",
+        "c": "262K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 52.2
+        },
+        "SWE-bench Lite": {
+          "score": 45.0
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.48,
+        "tokens": 18,
+        "model_used": "nvidia/nemotron-3-nano-30b-a3b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.73,
+        "tool": true,
+        "max_out": 153,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": {
+      "specs": {
+        "p": "30B/3.2B",
+        "c": "256K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.54,
+        "tokens": 18,
+        "model_used": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.52,
+        "tool": true,
+        "max_out": 142,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "specs": {
+        "p": "120B/12B",
+        "c": "262K",
+        "t": "chat",
+        "max_o": "4K"
+      },
+      "benchmarks": {
+        "swe_ver": "60.5%",
+        "mmlu": "86.0",
+        "aime": "90.2%",
+        "mmlu_pro": "83.7%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 3.69,
+        "tokens": 18,
+        "model_used": "nvidia/nemotron-3-super-120b-a12b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 1.19,
+        "tool": true,
+        "max_out": 161,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/nemotron-4-340b-instruct": {
+      "specs": {
+        "p": "340B",
+        "c": "4K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench bash-only": {
+          "score": 21.04
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nemotron-4-340b-reward": {
+      "specs": {
+        "p": "340B",
+        "c": "â€”",
+        "t": "other"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nemotron-content-safety-reasoning-4b": {
+      "specs": {
+        "p": "4B",
+        "c": "â€”",
+        "t": "safety"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.68,
+        "tokens": 11,
+        "model_used": "stg/nvidia/nemotron-content-safety-reasoning-4b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.28,
+        "tool": false,
+        "max_out": 105,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/nemotron-mini-4b-instruct": {
+      "specs": {
+        "p": "4B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 21.04
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.24,
+        "tokens": 14,
+        "model_used": "nvidia/nemotron-mini-4b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.27,
+        "tool": true,
+        "max_out": 158,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/nemotron-nano-12b-v2-vl": {
+      "specs": {
+        "p": "12B",
+        "c": "â€”",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.29,
+        "tokens": 17,
+        "model_used": "nvidia/nemotron-nano-12b-v2-vl",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.4,
+        "tool": true,
+        "max_out": 115,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/nemotron-nano-3-30b-a3b": {
+      "specs": {
+        "p": "30B/3.2B",
+        "c": "262K",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "SWE-bench Verified": {
+          "score": 52.2
+        },
+        "SWE-bench Lite": {
+          "score": 45.0
+        }
+      },
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nemotron-parse": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "other"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "HTTP400",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 400,
+        "detail": "Error code: 400 - {'object': 'error', 'message': 'Content cannot be a plain stri"
+      }
+    },
+    "nvidia/neva-22b": {
+      "specs": {
+        "p": "22B",
+        "c": "4K",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nv-embed-v1": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nv-embedcode-7b-v1": {
+      "specs": {
+        "p": "7B",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nv-embedqa-e5-v5": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nv-embedqa-mistral-7b-v2": {
+      "specs": {
+        "p": "7B",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nvclip": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/nvidia-nemotron-nano-9b-v2": {
+      "specs": {
+        "p": "9B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.4,
+        "tokens": 15,
+        "model_used": "nvidia/nvidia-nemotron-nano-9b-v2",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.4,
+        "tool": true,
+        "max_out": 200,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "length"
+      }
+    },
+    "nvidia/riva-translate-4b-instruct": {
+      "specs": {
+        "p": "4B",
+        "c": "â€”",
+        "t": "speech"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "nvidia/riva-translate-4b-instruct-v1.1": {
+      "specs": {
+        "p": "4B",
+        "c": "â€”",
+        "t": "speech"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.26,
+        "tokens": 15,
+        "model_used": "nvidia/riva-translate-4b-instruct-v1.1",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.33,
+        "tool": false,
+        "max_out": 12,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "nvidia/vila": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "vision"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "openai/gpt-oss-120b": {
+      "specs": {
+        "p": "120B/5.1B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "16K"
+      },
+      "benchmarks": {
+        "Fortress": {
+          "score": 8.24
+        },
+        "SWE-bench bash-only": {
+          "score": 26.0
+        },
+        "swe_pro": "16.20",
+        "mmlu": "83.5%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.35,
+        "tokens": 67,
+        "model_used": "openai/gpt-oss-120b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.32,
+        "tool": true,
+        "max_out": 156,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "openai/gpt-oss-20b": {
+      "specs": {
+        "p": "21B/3.6B",
+        "c": "128K",
+        "t": "chat",
+        "max_o": "16K"
+      },
+      "benchmarks": {
+        "Fortress": {
+          "score": 8.24
+        },
+        "SWE-bench bash-only": {
+          "score": 26.0
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.49,
+        "tokens": 67,
+        "model_used": "openai/gpt-oss-20b",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.52,
+        "tool": true,
+        "max_out": 155,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "qwen/qwen3-coder-480b-a35b-instruct": {
+      "specs": {
+        "p": "480B/35B",
+        "c": "262K",
+        "t": "chat",
+        "max_o": "8K"
+      },
+      "benchmarks": {
+        "SWE-bench bash-only": {
+          "score": 55.4
+        },
+        "swe_pro": "38.70%",
+        "swe_ver": "~70%"
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.9,
+        "tokens": 10,
+        "model_used": "qwen/qwen3-coder-480b-a35b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": false,
+        "stream_lat": 0,
+        "tool": true,
+        "max_out": 115,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "sarvamai/sarvam-m": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.33,
+        "tokens": 37,
+        "model_used": "sarvamai/sarvam-m",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.32,
+        "tool": false,
+        "max_out": 200,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "length"
+      }
+    },
+    "snowflake/arctic-embed-l": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "embedding"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "stepfun-ai/step-3.5-flash": {
+      "specs": {
+        "p": "â€”",
+        "c": "â€”",
+        "t": "chat"
+      },
+      "benchmarks": {
+        "MCP Atlas": {
+          "score": 83.6
+        }
+      },
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.55,
+        "tokens": 14,
+        "model_used": "stepfun-ai/step-3.5-flash",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 3.45,
+        "tool": true,
+        "max_out": 200,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "length"
+      }
+    },
+    "stockmark/stockmark-2-100b-instruct": {
+      "specs": {
+        "p": "100B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.35,
+        "tokens": 7,
+        "model_used": "stg/stockmark/stockmark-2-100b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.41,
+        "tool": false,
+        "max_out": 88,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "upstage/solar-10.7b-instruct": {
+      "specs": {
+        "p": "10.7B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "OK",
+        "latency_s": 0.3,
+        "tokens": 12,
+        "model_used": "upstage/solar-10.7b-instruct",
+        "fingerprint": null,
+        "finish_reason": "length",
+        "rate_limit_headers": {},
+        "http": null,
+        "detail": null
+      },
+      "phase2": {
+        "stream": true,
+        "stream_lat": 0.36,
+        "tool": false,
+        "max_out": 123,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "max_output_fingerprint": null,
+        "max_output_finish_reason": "stop"
+      }
+    },
+    "writer/palmyra-creative-122b": {
+      "specs": {
+        "p": "122B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "writer/palmyra-fin-70b-32k": {
+      "specs": {
+        "p": "70B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "writer/palmyra-med-70b": {
+      "specs": {
+        "p": "70B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "writer/palmyra-med-70b-32k": {
+      "specs": {
+        "p": "70B",
+        "c": "32K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    },
+    "zyphra/zamba2-7b-instruct": {
+      "specs": {
+        "p": "7B",
+        "c": "128K",
+        "t": "chat"
+      },
+      "benchmarks": {},
+      "phase1": {
+        "status": "404",
+        "latency_s": null,
+        "tokens": null,
+        "model_used": null,
+        "fingerprint": null,
+        "finish_reason": null,
+        "rate_limit_headers": null,
+        "http": 404,
+        "detail": null
+      }
+    }
+  },
+  "complete_ids": [
+    "01-ai/yi-large",
+    "abacusai/dracarys-llama-3.1-70b-instruct",
+    "adept/fuyu-8b",
+    "ai21labs/jamba-1.5-large-instruct",
+    "aisingapore/sea-lion-7b-instruct",
+    "baai/bge-m3",
+    "bigcode/starcoder2-15b",
+    "databricks/dbrx-instruct",
+    "deepseek-ai/deepseek-coder-6.7b-instruct",
+    "deepseek-ai/deepseek-v4-flash",
+    "deepseek-ai/deepseek-v4-pro",
+    "google/codegemma-1.1-7b",
+    "google/codegemma-7b",
+    "google/deplot",
+    "google/gemma-2-2b-it",
+    "google/gemma-2b",
+    "google/gemma-3-12b-it",
+    "google/gemma-3-4b-it",
+    "google/gemma-3n-e2b-it",
+    "google/gemma-3n-e4b-it",
+    "google/gemma-4-31b-it",
+    "google/recurrentgemma-2b",
+    "ibm/granite-3.0-3b-a800m-instruct",
+    "ibm/granite-3.0-8b-instruct",
+    "ibm/granite-34b-code-instruct",
+    "ibm/granite-8b-code-instruct",
+    "meta/codellama-70b",
+    "meta/llama-3.1-70b-instruct",
+    "meta/llama-3.1-8b-instruct",
+    "meta/llama-3.2-11b-vision-instruct",
+    "meta/llama-3.2-1b-instruct",
+    "meta/llama-3.2-3b-instruct",
+    "meta/llama-3.2-90b-vision-instruct",
+    "meta/llama-3.3-70b-instruct",
+    "meta/llama-4-maverick-17b-128e-instruct",
+    "meta/llama-guard-4-12b",
+    "meta/llama2-70b",
+    "microsoft/kosmos-2",
+    "microsoft/phi-3-vision-128k-instruct",
+    "microsoft/phi-3.5-moe-instruct",
+    "mistralai/codestral-22b-instruct-v0.1",
+    "mistralai/mistral-large",
+    "mistralai/mistral-large-2-instruct",
+    "mistralai/mixtral-8x22b-v0.1",
+    "nv-mistralai/mistral-nemo-12b-instruct",
+    "nvidia/ai-synthetic-video-detector",
+    "nvidia/cosmos-reason2-8b",
+    "nvidia/embed-qa-4",
+    "nvidia/llama-3.1-nemotron-51b-instruct",
+    "nvidia/llama-3.1-nemotron-70b-instruct",
+    "nvidia/llama-3.1-nemotron-ultra-253b-v1",
+    "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1",
+    "nvidia/llama-3.2-nv-embedqa-1b-v1",
+    "nvidia/llama-nemotron-embed-1b-v2",
+    "nvidia/llama-nemotron-embed-vl-1b-v2",
+    "nvidia/llama3-chatqa-1.5-70b",
+    "nvidia/mistral-nemo-minitron-8b-8k-instruct",
+    "nvidia/nemoretriever-parse",
+    "nvidia/nemotron-4-340b-instruct",
+    "nvidia/nemotron-4-340b-reward",
+    "nvidia/nemotron-nano-3-30b-a3b",
+    "nvidia/nemotron-parse",
+    "nvidia/neva-22b",
+    "nvidia/nv-embed-v1",
+    "nvidia/nv-embedcode-7b-v1",
+    "nvidia/nv-embedqa-e5-v5",
+    "nvidia/nv-embedqa-mistral-7b-v2",
+    "nvidia/nvclip",
+    "nvidia/riva-translate-4b-instruct",
+    "nvidia/vila",
+    "snowflake/arctic-embed-l",
+    "writer/palmyra-creative-122b",
+    "writer/palmyra-fin-70b-32k",
+    "writer/palmyra-med-70b",
+    "writer/palmyra-med-70b-32k",
+    "zyphra/zamba2-7b-instruct",
+    "microsoft/phi-4-mini-instruct",
+    "microsoft/phi-4-multimodal-instruct",
+    "minimaxai/minimax-m2.7",
+    "mistralai/ministral-14b-instruct-2512",
+    "mistralai/mistral-7b-instruct-v0.3",
+    "mistralai/mistral-large-3-675b-instruct-2512",
+    "mistralai/mistral-medium-3.5-128b",
+    "mistralai/mistral-nemotron",
+    "mistralai/mistral-small-4-119b-2603",
+    "mistralai/mixtral-8x7b-instruct-v0.1",
+    "moonshotai/kimi-k2.6",
+    "nvidia/gliner-pii",
+    "nvidia/ising-calibration-1-35b-a3b",
+    "nvidia/llama-3.1-nemoguard-8b-content-safety",
+    "nvidia/llama-3.1-nemoguard-8b-topic-control",
+    "nvidia/llama-3.1-nemotron-nano-8b-v1",
+    "nvidia/llama-3.1-nemotron-nano-vl-8b-v1",
+    "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
+    "nvidia/llama-3.3-nemotron-super-49b-v1",
+    "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+    "nvidia/nemotron-3-content-safety",
+    "nvidia/nemotron-3-nano-30b-a3b",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+    "nvidia/nemotron-3-super-120b-a12b",
+    "nvidia/nemotron-content-safety-reasoning-4b",
+    "nvidia/nemotron-mini-4b-instruct",
+    "nvidia/nemotron-nano-12b-v2-vl",
+    "nvidia/nvidia-nemotron-nano-9b-v2",
+    "nvidia/riva-translate-4b-instruct-v1.1",
+    "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b",
+    "qwen/qwen3-coder-480b-a35b-instruct",
+    "sarvamai/sarvam-m",
+    "stepfun-ai/step-3.5-flash",
+    "stockmark/stockmark-2-100b-instruct",
+    "upstage/solar-10.7b-instruct",
+    "nvidia/llama-3.2-nemoretriever-300m-embed-v1"
+  ],
+  "complete_count": 113,
+  "model_count": 113,
+  "benchmark_source": "bench.json (Scale AI + swebench.com + SWE-bench Pro)"
+}
