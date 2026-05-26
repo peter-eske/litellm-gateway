@@ -26,7 +26,6 @@
         "tool_calling": true
       },
       "known_specs_file": "known_specs_nvidia-nim.json",
-      "benchmarks_file": "benchmarks.json",
       "ignore_file": "ignore.json",
       "good_file": "good.json"
     }

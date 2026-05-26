@@ -1,0 +1,11 @@
+[project]
+name = "litellm-gateway-scripts"
+version = "0.1.0"
+description = "Benchmark and test scripts for the litellm-gateway NVIDIA NIM proxy"
+requires-python = ">=3.10"
+dependencies = [
+    "langchain-openai>=0.3",
+    "langchain-core>=0.3",
+    "langgraph>=0.3",
+    "openai>=1.0",
+]

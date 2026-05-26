@@ -1,0 +1,139 @@
+{
+  "default": {
+    "chat": {
+      "ok": true,
+      "latency": 74.8,
+      "tokens": 20
+    },
+    "stream": {
+      "ok": true,
+      "latency": 65.5,
+      "chunks": 2
+    },
+    "tools": {
+      "ok": true,
+      "latency": 8.6,
+      "has_tool": true
+    }
+  },
+  "nim-llama": {
+    "chat": {
+      "ok": true,
+      "latency": 185.9,
+      "tokens": 49
+    },
+    "stream": {
+      "ok": true,
+      "latency": 3.6,
+      "chunks": 8
+    },
+    "tools": {
+      "ok": true,
+      "latency": 11.3,
+      "has_tool": true
+    }
+  },
+  "fast": {
+    "chat": {
+      "ok": true,
+      "latency": 0.5,
+      "tokens": 18
+    },
+    "stream": {
+      "ok": true,
+      "latency": 0.3,
+      "chunks": 5
+    },
+    "tools": {
+      "ok": true,
+      "latency": 2.9,
+      "has_tool": true
+    }
+  },
+  "power": {
+    "chat": {
+      "ok": true,
+      "latency": 0.3,
+      "tokens": 18
+    },
+    "stream": {
+      "ok": true,
+      "latency": 1.7,
+      "chunks": 9
+    },
+    "tools": {
+      "ok": true,
+      "latency": 3.6,
+      "has_tool": true
+    }
+  },
+  "coding": {
+    "chat": {
+      "ok": true,
+      "latency": 2.0,
+      "tokens": 124
+    },
+    "stream": {
+      "ok": true,
+      "latency": 1.0,
+      "chunks": 5
+    },
+    "tools": {
+      "ok": true,
+      "latency": 3.1,
+      "has_tool": true
+    }
+  },
+  "reasoning": {
+    "chat": {
+      "ok": true,
+      "latency": 12.4,
+      "tokens": 19
+    },
+    "stream": {
+      "ok": true,
+      "latency": 0.8,
+      "chunks": 2
+    },
+    "tools": {
+      "ok": true,
+      "latency": 18.1,
+      "has_tool": true
+    }
+  },
+  "vision": {
+    "chat": {
+      "ok": true,
+      "latency": 0.4,
+      "tokens": 48
+    },
+    "stream": {
+      "ok": true,
+      "latency": 1.0,
+      "chunks": 8
+    },
+    "tools": {
+      "ok": true,
+      "latency": 3.3,
+      "has_tool": true
+    }
+  },
+  "safety": {
+    "chat": {
+      "ok": true,
+      "latency": 0.3,
+      "tokens": 411
+    },
+    "stream": {
+      "ok": true,
+      "latency": 0.7,
+      "chunks": 8
+    },
+    "tools": {
+      "ok": false,
+      "latency": 2.2,
+      "error": "Error code: 400 - {'error': {'message': \"litellm.BadRequestError: OpenAIException - Error code: 400 - {'error': 'Tool use has not been enabled, because it is unsupported by nvidia/llama-3.1-nemoguard-8b-content-safety.'}. Received Model Group=safety\\nAvailable Model Group Fallbacks=None\", 'type': None, 'param': None, 'code': '400'}}",
+      "expected": true
+    }
+  }
+}

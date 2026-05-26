@@ -1,129 +1,89 @@
 # AGENTS.md — litellm-gateway
 
-Single-Service LiteLLM-Deployment hinter NGINX, proxying 4 Modelle (5 Aliase) an die NVIDIA NIM API (Llama 3.3, DeepSeek V4 Flash, Phi-4-Mini, Qwen3-Coder-480B). Läuft auf einem entfernten VPS unter `/www/wwwroot/gateway.ftbot.de/`.
-
-## Architektur
+Single LiteLLM behind NGINX, proxying 8 model aliases to NVIDIA NIM. Deployed on VPS `213.202.218.154`.
 
 ```
-OpenCode → HTTPS + Bearer → NGINX (TLS, Rate Limit) → LiteLLM (Docker, Port 4000) → NVIDIA NIM API
+HTTPS + Bearer → NGINX (TLS) → LiteLLM (:4000) → NVIDIA NIM API
+                                    └→ Debate-Server (:8000, /debate/sse)
 ```
 
-- LiteLLM-Container: Image von `docker.litellm.ai/berriai/litellm:main-latest`, Config per Volume-Mount, Container-Name `litellm-gateway`
-- Port 4000 nur an `127.0.0.1` gebunden (kein öffentlicher Docker-Port)
-- NGINX terminiert TLS, erzwingt Rate Limits (60r/m global, 10r/s API, 10 Verbindungen), handled Streaming
-- LiteLLM-UI nur per SSH-Tunnel erreichbar: `ssh -L 4000:127.0.0.1:4000 root@$DOMAIN` → `http://localhost:4000/ui`
-- PostgreSQL (16-alpine) als Sidecar für Key-Management und Persistenz
+## Model Aliases
 
-## Wichtige Dateien
+All use `api_base: https://integrate.api.nvidia.com/v1`, `num_retries: 0`. Config in `litellm-config.yaml`. Note `openai/` prefix in model names (LiteLLM convention for OpenAI-compatible endpoints).
 
-| Datei | Zweck |
-|---|---|
-| `docker-compose.yml` | Zwei Services: `postgres` (16-alpine) + `litellm-gateway` (offizielles LiteLLM-Image), DB-Volume, Config per Volume-Mount |
-| `litellm-config.yaml` | 5 Modell-Aliase (nim-llama→llama-3.3, default→deepseek-v4-flash, fast→phi-4-mini, power→qwen3-coder-480b, coding→deepseek-v4-flash) |
-| `llm-toplist.md` | Rangliste Top-3 pro Rolle mit Benchmarks (aus good.json + bench.json) |
-| `.env.example` | Erforderliche Variablen: `NVIDIA_API_KEY`, `LITELLM_MASTER_KEY`, `UI_USERNAME`, `UI_PASSWORD`, `OPENCODE_API_KEY`, `DOMAIN` |
-| `opencode.json.example` | OpenCode-Client-Konfiguration für das Gateway |
+| Alias | Model | Temp | Max Tokens | Timeout | Stream | Tools |
+|---|---|---|---|---|---|---|
+| `nim-llama` | `meta/llama-3.3-70b-instruct` | 0.2 | 4096 | 180s | ✅ | ✅ |
+| `default` | `deepseek-ai/deepseek-v4-flash` | 0.2 | 8192 | 300s | ✅ | ✅ |
+| `fast` | `mistralai/ministral-14b-instruct-2512` | 0.5 | 4096 | 60s | ✅ | ✅ |
+| `power` | `mistralai/mistral-large-3-675b-instruct-2512` | 0.2 | 8192 | 300s | ✅ | ✅ |
+| `coding` | `openai/gpt-oss-120b` | 0.1 | 8192 | 180s | ✅ | ✅ |
+| `reasoning` | `deepseek-ai/deepseek-v4-pro` | 0.2 | 8192 | 300s | ✅ | ❌ |
+| `vision` | `meta/llama-3.2-90b-vision-instruct` | 0.2 | 4096 | 180s | ✅ | ✅ |
+| `safety` | `nvidia/llama-3.1-nemoguard-8b-content-safety` | 0.1 | 512 | 30s | ✅ | ❌ |
 
-### Test-Skripte (universal, provider-agnostisch)
+`nim-llama` has `top_p:0.7`. `power` replaces the original `qwen3-coder-480b` which had no streaming support on NIM. `safety` is a content guard only (no tools/chats). Benchmarks per alias in `llm-toplist.md`.
 
-| Datei | Zweck |
-|---|---|
-| `scripts/config.json` | **Provider-Konfiguration** — API-Base-URL, Auth, Rate Limits, Timeouts pro Anbieter |
-| `scripts/provider_api.py` | **Shared Library** — lädt Config, erzeugt OpenAI-Client, lädt Modelldaten |
-| `scripts/phase1_quick_test.py` | **Phase 1**: 1-Token Health-Check aller Modelle (-> `phase1_results_{provider}.json`) |
-| `scripts/test_models.py` | **Phase 2**: Streaming, Tool Calling, Max Output für OK-Modelle (-> `phase2_summary_{provider}.md`) |
-| `scripts/known_specs_{provider}.json` | **Modell-Metadaten** pro Provider (Parameter, Context, Typ) |
-| `scripts/bench.json` | **Benchmark-Daten** (45 Benchmarks, 438 Modelle aus Scale AI + swebench.com + SWE-bench Pro) |
-| `scripts/fetch_scale_leaderboard.py` | Extrahiert 38 Benchmarks aus dem Scale AI Leaderboard (RSC Payload) |
-| `scripts/fetch_swebench.py` | Extrahiert 6 SWE-bench Leaderboards (Verified, bash-only, Multilingual, etc.) |
-| `scripts/rank_models.py` | Rangliste Top-3 pro OpenCode-Alias aus good.json |
-| `scripts/update_benchmarks_in_good.py` | Merged bench.json → good.json |
-| `scripts/restore_lost_benchmarks.py` | Stellt alte Benchmark-Daten wieder her |
+## Configuration Reference
 
-### NVIDIA NIM spezifisch
+- **Env vars** (`.env` required, see `.env.example`): `NVIDIA_API_KEY`, `LITELLM_MASTER_KEY`, `UI_USERNAME`, `UI_PASSWORD`, `OPENCODE_API_KEY`, `POSTGRES_PASSWORD`, `DOMAIN`
+- **Infra**: `docker-compose.yml` (3 services: postgres, litellm-gateway, debate-server)
+- **LiteLLM image**: `docker.litellm.ai/berriai/litellm:main-latest` (anonymous pull)
+- **OpenCode client**: `opencode.json.example` / `opencode.md`
+- **Debate-server**: built from `github.com/peter-eske/MCP-Server-Tools`, exposed at `/debate/sse`
+- Port 4000 bound to `127.0.0.1` only (no public Docker port)
+- Healthcheck: `/health/liveliness` (no auth). `/health` requires DB + auth
+- DB: PostgreSQL 16-alpine sidecar for key management
+- LiteLLM queue: local, 60s timeout, `routing_strategy: "simple-shuffle"`
+- NGINX `proxy_read_timeout 300s` (must exceed LiteLLM's 60s queue timeout)
 
-| Datei | Zweck |
-|---|---|
-| `scripts/NIM_API_REFERENCE.md` | NVIDIA NIM API Referenz (Endpoints, Env Vars) |
-| `scripts/NIM_FAILURE_LOG.md` | Log aller 404/410/Timeout Modelle |
-| `scripts/phase1_results.json` | Phase 1 NVIDIA Ergebnisse (Legacy) |
-| `scripts/phase1_results_nvidia-nim.json` | Phase 1 NVIDIA Ergebnisse (neues Format) |
+## Deployment (push to `main` → GitHub Actions)
 
-## Script Usage
+Workflow in `.github/workflows/deploy.yml` (secrets: `SSH_HOST`, `SSH_USER`, `SSH_KEY`, `SSH_PORT`):
+1. `git fetch origin && git reset --hard origin/main`
+2. Source `.env` at project root (fails if missing)
+3. Patch aaPanel NGINX config (streaming, 300s timeouts, `/debate/` location)
+4. `docker rm -f litellm-gateway`, `docker compose pull`, `docker compose build debate-server`, `docker compose up -d`
+5. Wait for `/health/liveliness` (30×2s retries)
+6. Delete old `sk-opencode-*` key, recreate with all 8 models (40 RPM, 2.1s min delay)
+7. Verify debate-server SSE endpoints
+
+## SSH & Container Management
 
 ```bash
-# Phase 1: Health-Check aller Modelle
+ssh peter@213.202.218.154
+cd /www/wwwroot/gateway.ftbot.de
+docker compose logs -f
+docker compose down && docker compose up -d
+ssh -L 4000:127.0.0.1:4000 peter@213.202.218.154   # tunnel → http://localhost:4000/ui
+```
+
+## Scripts Pipeline
+
+Test scripts under `scripts/`, provider-agnostic, using `openai` v2.x SDK. Config: `scripts/config.json` (20 RPM, 3s delay).
+
+```powershell
+pip install openai
 $env:NVIDIA_API_KEY = "nvapi-..."
-python scripts/phase1_quick_test.py --provider nvidia-nim
-
-# Phase 2: Detailtests (nur OK-Modelle)
-python scripts/test_models.py --provider nvidia-nim
+python scripts/phase1_quick_test.py --provider nvidia-nim   # health + 404 detection
+python scripts/test_models.py --provider nvidia-nim          # stream/tool/max_out test
+python scripts/update_benchmarks_in_good.py                  # bench.json → good.json
+python scripts/rank_models.py                                # top-3 per alias
 ```
 
-Bei neuem Provider: `config.json` erweitern, `known_specs_{provider}.json` anlegen, `--provider name` übergeben.
+Data: `scripts/good.json` (113 models), `scripts/bench.json` (45 sources, 438 models). 404/timeout models auto-ignored in `scripts/ignore.json`.
 
-## OpenCode Skill: API Error Handling
-
-Ein permanenter Skill unter `~/.config/opencode/skills/api-error-handling/SKILL.md`
-dokumentiert die HTTP-Fehlerklassifikation für KI-APIs. Enthält:
-- Bedeutung von 404, 401, 403, 429, 500
-- `openai`-Exception-Hierarchie (NotFoundError, RateLimitError, etc.)
-- Python-Codebeispiele für try-except, Model-Liste, Raw-Response-Header
-
-## Verifikation
+## Verification
 
 ```bash
-curl -s https://$DOMAIN/health
-curl -s https://$DOMAIN/v1/chat/completions \
-  -H "Authorization: Bearer $OPENCODE_API_KEY" \
-  -H "Content-Type: application/json" \
+curl -s https://gateway.ftbot.de/health/liveliness            # "I'm alive!"
+curl -s https://gateway.ftbot.de/v1/chat/completions \
+  -H "Authorization: Bearer $OPENCODE_API_KEY" -H "Content-Type: application/json" \
   -d '{"model":"nim-llama","messages":[{"role":"user","content":"Test"}]}'
-# Teste weitere Aliase: default, fast, power, coding
+curl -H "Authorization: Bearer $LITELLM_MASTER_KEY" https://gateway.ftbot.de/v1/models
 ```
 
-## Container-Neustart
+## Notes
 
-```bash
-docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml down
-docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml up -d
-docker compose -f /www/wwwroot/gateway.ftbot.de/docker-compose.yml logs -f
-```
-
-## Fallstricke
-
-- `docker.litellm.ai` erlaubt anonyme Pulls (kein Login nötig)
-- Alle Skripte nutzen die `openai`-Bibliothek (v2.x) statt `urllib` — muss installiert sein: `pip install openai`
-- `openai`-Exception-Hierarchie: `APIError` → `APIStatusError` (404=NotFoundError, 429=RateLimitError, etc.), `APITimeoutError`, `APIConnectionError`
-- Rate-Limit-Header via `client.with_raw_response.chat.completions.create(...)` → `raw.headers`
-
-## CI/CD (GitHub Actions)
-
-Bei Push auf `main` führt der Workflow `.github/workflows/deploy.yml` einen Job aus:
-
-1. **`deploy`** – Per SSH auf den VPS: git pull, `.env` laden, Container neustarten, Virtual Key anlegen, Verifikation
-
-Kein eigener Image-Build mehr – die Config wird per Volume-Mount bereitgestellt, das Image kommt direkt von `docker.litellm.ai/berriai/litellm:main-latest`.
-
-### Erforderliche GitHub Secrets (Org-Ebene Eske-IT)
-
-Organisation-Secrets unter `https://github.com/organizations/Eske-IT/settings/secrets/actions`. Siehe `.github/SECRETS.md` für Details.
-
-| Secret | Beschreibung |
-|---|---|
-| `SSH_HOST` | `213.202.218.154` |
-| `SSH_USER` | `root` |
-| `SSH_KEY` | Privater SSH-Key (via `ssh-keygen -t ed25519`) |
-| `SSH_PORT` | `22` |
-
-Den Public-Key auf dem VPS autorisieren: `ssh-copy-id root@213.202.218.154`
-
-- `.env` **muss** unter `/www/wwwroot/gateway.ftbot.de/.env` existieren, sonst bricht der Workflow ab
-- Docker healthcheck nutzt `/health/liveliness` (kein Auth, kein DB nötig) – nicht `/health` (braucht DB + Auth)
-- `public_endpoints: ["/health", "/health/liveliness"]` in `litellm-config.yaml`
-- Keine deploy-Limits (512M + healthcheck-Fails verursachten OOM exit 137)
-- Config wird per Volume-Mount in `docker-compose.yml` bereitgestellt (kein eigener Image-Build)
-- Keine Retries (`num_retries: 0`), kein Redis, keine Telemetrie
-- PostgreSQL (16-alpine) für Key-Management – `DATABASE_URL` via Environment
-- Virtual Key `sk-opencode-...` wird im Workflow automatisch via API angelegt
-- aaPanel NGINX-Config patcht der Workflow automatisch: `https://localhost:4000` → `http://127.0.0.1:4000`, `Host localhost` → `Host $host`, + streaming
-- `plan.md` wurde gelöscht — alle relevanten Informationen sind in dieser `AGENTS.md` enthalten
+- This repo is pure infra config + CI + Python scripts. No local dev server.
+- `clean-old-winget.ps1` is unrelated to the gateway — ignore it.

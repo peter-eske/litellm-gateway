@@ -60,15 +60,22 @@ jobs:
               if ! grep -q "proxy_read_timeout" "$AA_CONF" 2>/dev/null; then
                 sed -i 's|proxy_pass http://127.0.0.1:4000;|proxy_pass http://127.0.0.1:4000;\n      proxy_read_timeout 300s;\n      proxy_send_timeout 300s;|' "$AA_CONF"
               fi
+
+              # ── /debate/ Location für Debate-Server ──
+              if ! grep -q "location /debate/" "$AA_CONF" 2>/dev/null; then
+                sed -i '/^server {/a\  location /debate/ {\n    proxy_pass http://127.0.0.1:8000/;\n    proxy_http_version 1.1;\n    proxy_set_header Upgrade $http_upgrade;\n    proxy_set_header Connection "upgrade";\n    proxy_set_header Host $host;\n    proxy_buffering off;\n    proxy_cache off;\n    proxy_read_timeout 300s;\n  }' "$AA_CONF"
+                echo ">>> /debate/ Location hinzugefügt"
+              fi
               nginx -t && systemctl reload nginx && echo ">>> NGINX neu geladen"
             fi
 
-            # ── Docker Container ──
+              # ── Docker Container ──
             echo ""
             echo ">>> Container neustarten"
             cd "$PROJECT_DIR"
             docker rm -f litellm-gateway 2>/dev/null || true
-            docker compose pull
+            docker compose pull litellm-gateway postgres
+            docker compose build debate-server
             docker compose up -d
 
             echo -n "Warte auf LiteLLM"
@@ -98,7 +105,7 @@ jobs:
               -H "Content-Type: application/json" \
               -d "{
                 \"key\": \"$OPENCODE_API_KEY\",
-                \"models\": [\"nim-llama\", \"default\", \"fast\", \"power\", \"coding\"],
+                \"models\": [\"nim-llama\", \"default\", \"fast\", \"power\", \"coding\", \"reasoning\", \"vision\", \"safety\"],
                 \"rpm_limit\": 40,
                 \"tpm_limit\": 1000000,
                 \"max_parallel_requests\": 1,
@@ -106,13 +113,19 @@ jobs:
                   \"description\": \"OpenCode Gateway Key\",
                   \"min_delay_ms\": 2100
                 }
-              }" >/dev/null 2>&1 && echo "Key erstellt (5 Modelle, 40 RPM)" || echo "Key-Erstellung fehlgeschlagen"
+              }" >/dev/null 2>&1 && echo "Key erstellt (8 Modelle, 40 RPM)" || echo "Key-Erstellung fehlgeschlagen"
 
             # ── Verifikation ──
             echo ""
             echo ">>> Verifikation"
             echo -n "Health Liveliness: "
             curl -sf http://127.0.0.1:4000/health/liveliness >/dev/null 2>&1 && echo "OK" || echo "FEHLER"
+
+            echo -n "Debate-Server SSE: "
+            curl -sfN -o /dev/null -w "HTTP %{http_code}" http://127.0.0.1:8000/sse 2>/dev/null || echo "nicht bereit (normal bei erster Anfrage)"
+            echo ""
+            echo -n "Debate-Server via NGINX: "
+            curl -sfN -o /dev/null -w "HTTP %{http_code}" https://gateway.ftbot.de/debate/sse --max-time 3 2>/dev/null || echo "prüfe später (erster Start)"
 
             echo ""
             echo "════════════════════════════════════════"

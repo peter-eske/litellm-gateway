@@ -55,5 +55,29 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  debate-server:
+    build:
+      context: https://github.com/peter-eske/MCP-Server-Tools.git
+      dockerfile: Dockerfile
+    container_name: debate-server
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - LITELLM_API_BASE=http://litellm-gateway:4000
+      - LITELLM_API_KEY=${OPENCODE_API_KEY}
+      - MCP_TRANSPORT=sse
+      - PORT=8000
+    depends_on:
+      - litellm-gateway
+    volumes:
+      - debate_logs:/app/logs
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 volumes:
   postgres_data:
+  debate_logs:

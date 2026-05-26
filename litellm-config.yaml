@@ -25,23 +25,24 @@ model_list:
       max_tokens: 8192
       temperature: 0.2
       num_retries: 0
-      request_timeout: 180
+      request_timeout: 300
 
-  # ── Low-Latency (3.8B, 88.6% GSM8K) ──────────────────────────────────
+  # ── Low-Latency (14B, 0.25s, stream+tools) ──────────────────────────
   - model_name: fast
     litellm_params:
-      model: openai/microsoft/phi-4-mini-instruct
+      model: openai/mistralai/ministral-14b-instruct-2512
       api_base: https://integrate.api.nvidia.com/v1
       api_key: os.environ/NVIDIA_API_KEY
-      max_tokens: 2048
+      max_tokens: 4096
       temperature: 0.5
+      stream: true
       num_retries: 0
       request_timeout: 60
 
-  # ── Maximale Qualität (38.70% SWE-bench Pro, 55.4% bash-only) ────────
+  # ── Maximale Qualität (675B, 0.37s, stream+tools) ──────────────────
   - model_name: power
     litellm_params:
-      model: openai/qwen/qwen3-coder-480b-a35b-instruct
+      model: openai/mistralai/mistral-large-3-675b-instruct-2512
       api_base: https://integrate.api.nvidia.com/v1
       api_key: os.environ/NVIDIA_API_KEY
       max_tokens: 8192
@@ -49,16 +50,51 @@ model_list:
       num_retries: 0
       request_timeout: 300
 
-  # ── Code-Spezialist (v4-flash, Tool-Support, niedrige Temperatur) ─────
+  # ── Code-Spezialist (Fortress 8.24, SWE-bench 26.0%, stream+tools) ──
   - model_name: coding
     litellm_params:
-      model: openai/deepseek-ai/deepseek-v4-flash
+      model: openai/openai/gpt-oss-120b
       api_base: https://integrate.api.nvidia.com/v1
       api_key: os.environ/NVIDIA_API_KEY
       max_tokens: 8192
       temperature: 0.1
       num_retries: 0
       request_timeout: 180
+
+  # ── Deep Reasoning (v4-pro, 1.61s, stream, keine Tools) ─────────────
+  - model_name: reasoning
+    litellm_params:
+      model: openai/deepseek-ai/deepseek-v4-pro
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 8192
+      temperature: 0.2
+      stream: true
+      num_retries: 0
+      request_timeout: 300
+
+  # ── Vision (90B, 4.11s, stream+tools, Bildverstehen) ────────────────
+  - model_name: vision
+    litellm_params:
+      model: openai/meta/llama-3.2-90b-vision-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 4096
+      temperature: 0.2
+      stream: true
+      num_retries: 0
+      request_timeout: 180
+
+  # ── Content Safety Guard (8B, 0.36s, kein Stream) ───────────────────
+  - model_name: safety
+    litellm_params:
+      model: openai/nvidia/llama-3.1-nemoguard-8b-content-safety
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 512
+      temperature: 0.1
+      num_retries: 0
+      request_timeout: 30
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY

@@ -1,0 +1,166 @@
+{
+  "models_list": {
+    "ok": true,
+    "names": [
+      "coding",
+      "default",
+      "fast",
+      "nim-llama",
+      "power",
+      "reasoning",
+      "safety",
+      "vision"
+    ]
+  },
+  "models": {
+    "default": {
+      "chat": {
+        "ok": true,
+        "latency_s": 10.68,
+        "tokens": 29,
+        "text": "Hallo, wie kann ich helfen?"
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 318.22,
+        "chunks": 2
+      },
+      "tools": {
+        "ok": true,
+        "latency_s": 45.99,
+        "has_tool": true
+      }
+    },
+    "nim-llama": {
+      "chat": {
+        "ok": true,
+        "latency_s": 1.03,
+        "tokens": 58,
+        "text": "Hallo, wie geht es?"
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 3.72,
+        "chunks": 9
+      },
+      "tools": {
+        "ok": true,
+        "latency_s": 0.91,
+        "has_tool": true
+      }
+    },
+    "fast": {
+      "chat": {
+        "ok": true,
+        "latency_s": 0.33,
+        "tokens": 29,
+        "text": "Hallo, wie geht’s? 😊"
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 3.07,
+        "chunks": 9
+      },
+      "tools": {
+        "ok": true,
+        "latency_s": 1.14,
+        "has_tool": true
+      }
+    },
+    "power": {
+      "chat": {
+        "ok": true,
+        "latency_s": 8.02,
+        "tokens": 27,
+        "text": "Hallo!"
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 429.36,
+        "chunks": 4
+      },
+      "tools": {
+        "ok": true,
+        "latency_s": 268.31,
+        "has_tool": true
+      }
+    },
+    "coding": {
+      "chat": {
+        "ok": true,
+        "latency_s": 0.46,
+        "tokens": 129,
+        "text": ""
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 2.52,
+        "chunks": 9
+      },
+      "tools": {
+        "ok": true,
+        "latency_s": 0.49,
+        "has_tool": true
+      }
+    },
+    "reasoning": {
+      "chat": {
+        "ok": true,
+        "latency_s": 21.07,
+        "tokens": 29,
+        "text": "Hallo, wie geht's dir?"
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 6.98,
+        "chunks": 2
+      },
+      "tools": {
+        "ok": true,
+        "latency_s": 2.86,
+        "has_tool": true
+      }
+    },
+    "vision": {
+      "chat": {
+        "ok": true,
+        "latency_s": 0.62,
+        "tokens": 58,
+        "text": "Hallo, wie geht's?"
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 4.06,
+        "chunks": 9
+      },
+      "tools": {
+        "ok": true,
+        "latency_s": 1.17,
+        "has_tool": true
+      }
+    },
+    "safety": {
+      "chat": {
+        "ok": true,
+        "latency_s": 0.24,
+        "tokens": 418,
+        "text": "{\"User Safety\": \"safe\"} "
+      },
+      "stream": {
+        "ok": true,
+        "latency_s": 2.77,
+        "chunks": 8
+      },
+      "tools": {
+        "ok": false,
+        "latency_s": 0.21,
+        "error": "Error code: 400 - {'error': {'message': \"litellm.BadRequestError: OpenAIException - Error code: 400 - {'error': 'Tool use has not been enabled, because it is unsupported by nvidia/llama-3.1-nemoguard-8b-content-safety.'}. Received Model Group=safety\\nAvailable Model Group Fallbacks=None\", 'type': None, 'param': None, 'code': '400'}}"
+      },
+      "safety_test": {
+        "ok": true,
+        "latency_s": 2.39,
+        "text": "{\"User Safety\": \"safe\"} "
+      }
+    }
+  }
+}
